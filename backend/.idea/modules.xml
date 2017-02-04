@@ -4,8 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/backend.iml" filepath="$PROJECT_DIR$/backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/Acessodatos/core.accesodatos.iml" filepath="$PROJECT_DIR$/Acessodatos/core.accesodatos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Acessodatos/Contratos/core.accesodatos.contratos.iml" filepath="$PROJECT_DIR$/Acessodatos/Contratos/core.accesodatos.contratos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Acessodatos/Implementacion/core.accesodatos.implementacion.iml" filepath="$PROJECT_DIR$/Acessodatos/Implementacion/core.accesodatos.implementacion.iml" />
       <module fileurl="file://$PROJECT_DIR$/Comun/core.comun.iml" filepath="$PROJECT_DIR$/Comun/core.comun.iml" />
       <module fileurl="file://$PROJECT_DIR$/Comun/Entidades/core.comun.entidades.iml" filepath="$PROJECT_DIR$/Comun/Entidades/core.comun.entidades.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Comun/Utilidades/core.comun.utilidades.iml" filepath="$PROJECT_DIR$/Comun/Utilidades/core.comun.utilidades.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logica/webservice.logica.iml" filepath="$PROJECT_DIR$/Logica/webservice.logica.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logica/Contratos/webservice.logica.contratos.iml" filepath="$PROJECT_DIR$/Logica/Contratos/webservice.logica.contratos.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logica/Implementacion/webservice.logica.implementacion.iml" filepath="$PROJECT_DIR$/Logica/Implementacion/webservice.logica.implementacion.iml" />

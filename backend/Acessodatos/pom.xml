@@ -11,6 +11,11 @@
 
     <groupId>com.vanesoft.vtrack.core</groupId>
     <artifactId>core.accesodatos</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>Contratos</module>
+        <module>Implementacion</module>
+    </modules>
 
 
 </project>

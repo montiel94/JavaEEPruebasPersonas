@@ -13,9 +13,8 @@
     <artifactId>webservice.logica</artifactId>
     <packaging>pom</packaging>
     <modules>
-
-        <module>Contratos</module>
         <module>Implementacion</module>
+        <module>Contratos</module>
     </modules>
 
 

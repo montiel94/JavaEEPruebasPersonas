@@ -1,1 +1,3 @@
+com\vanesoft\vtrack\webservice\logica\implementacion\seguridad\ComandoSeguridad.class
 com\vanesoft\vtrack\webservice\logica\implementacion\seguridad\ComandoGenerarToken.class
+com\vanesoft\vtrack\webservice\logica\implementacion\seguridad\ComandoGenerarCodigoAutorizacion.class

@@ -7,7 +7,9 @@ import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
 import org.apache.oltu.oauth2.as.response.OAuthASResponse;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
-
+import  com.vanesoft.vtrack.core.accesodatos.contratos.IDaoCodigoToken;
+import com.vanesoft.vtrack.core.accesodatos.implementacion.DaoCodigoToken;
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,11 +23,13 @@ import javax.servlet.http.HttpServletResponse;
  * @version 1.0
  * @since 03/02/2017
  */
+
 public class ComandoGenerarCodigoAutorizacion extends ComandoSeguridad{
 
     //region atributos
     private CodigoToken codigoAutorizacion;
     private HttpServletRequest request;
+    private IDaoCodigoToken daoCodigoToken = new DaoCodigoToken();
     //end region
 
     //contructor del comando
@@ -50,6 +54,7 @@ public class ComandoGenerarCodigoAutorizacion extends ComandoSeguridad{
                      .buildJSONMessage( );
              String codigo = getCodigoToken(respuesta);
              registrarCodigoAutorizacion(codigo);
+             daoCodigoToken.guardarCodigoToken(codigoAutorizacion);
 
          }
          catch (OAuthSystemException e)

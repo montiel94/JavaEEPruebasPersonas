@@ -34,6 +34,15 @@
           <element id="library" level="project" name="Maven: org.apache.oltu.oauth2:org.apache.oltu.oauth2.dynamicreg.client:1.0.2" />
           <element id="library" level="project" name="Maven: org.apache.oltu.oauth2:org.apache.oltu.oauth2.dynamicreg.common:1.0.2" />
           <element id="library" level="project" name="Maven: org.apache.oltu.oauth2:org.apache.oltu.oauth2.dynamicreg.server:1.0.2" />
+          <element id="archive" name="core.accesodatos.contratos-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="core.accesodatos.contratos" />
+          </element>
+          <element id="archive" name="core.accesodatos.implementacion-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="core.accesodatos.implementacion" />
+          </element>
+          <element id="archive" name="core.comun.utilidades-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="core.comun.utilidades" />
+          </element>
         </element>
       </element>
       <element id="directory" name="META-INF">

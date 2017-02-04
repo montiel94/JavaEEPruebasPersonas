@@ -30,5 +30,8 @@
     <orderEntry type="library" name="Maven: org.apache.oltu.oauth2:org.apache.oltu.oauth2.dynamicreg.client:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.oltu.oauth2:org.apache.oltu.oauth2.dynamicreg.common:1.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.oltu.oauth2:org.apache.oltu.oauth2.dynamicreg.server:1.0.2" level="project" />
+    <orderEntry type="module" module-name="core.accesodatos.contratos" />
+    <orderEntry type="module" module-name="core.accesodatos.implementacion" />
+    <orderEntry type="module" module-name="core.comun.utilidades" />
   </component>
 </module>
