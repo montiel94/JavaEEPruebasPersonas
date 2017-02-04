@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.vanesoft.vtrack.webservice:webservice.logica.contratos:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vanesoft/vtrack/webservice/webservice.logica.contratos/1.0-SNAPSHOT/webservice.logica.contratos-1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vanesoft/vtrack/webservice/webservice.logica.contratos/1.0-SNAPSHOT/webservice.logica.contratos-1.0-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vanesoft/vtrack/webservice/webservice.logica.contratos/1.0-SNAPSHOT/webservice.logica.contratos-1.0-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
