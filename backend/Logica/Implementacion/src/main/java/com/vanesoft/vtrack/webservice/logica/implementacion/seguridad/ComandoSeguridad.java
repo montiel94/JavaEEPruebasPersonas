@@ -2,6 +2,7 @@ package com.vanesoft.vtrack.webservice.logica.implementacion.seguridad;
 
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.webservice.logica.contratos.IComando;
+import com.vanesoft.vtrack.webservice.logica.implementacion.ComandoBase;
 import org.apache.oltu.oauth2.common.OAuth;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
 
@@ -16,7 +17,7 @@ import org.apache.oltu.oauth2.common.message.OAuthResponse;
  * @version 1.0
  * @since 03/02/2017
  */
-public abstract  class ComandoSeguridad implements IComando<CodigoToken>{
+public abstract  class ComandoSeguridad<CodigoToken> extends ComandoBase<CodigoToken>{
 
     /*
         Descripcion : Metodo para obtener el codigo de autorizacion o token dado un

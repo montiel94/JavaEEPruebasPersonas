@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class EntidadBase implements Serializable{
     //region atributos
-    protected long id;
+    protected int id;
     //end region atributos
     /*
      * Nombre:                  getId
@@ -33,7 +33,7 @@ public class EntidadBase implements Serializable{
      * @author montda
      * @since 03/02/2017
      */
-    public void setId( Long valor )
+    public void setId( int valor )
     {
         this.id = valor;
     }

@@ -1,2 +1,3 @@
 com\vanesoft\vtrack\core\accesodatos\implementacion\DaoCodigoToken.class
 com\vanesoft\vtrack\core\accesodatos\implementacion\Dao.class
+com\vanesoft\vtrack\core\accesodatos\implementacion\FabricaDao.class

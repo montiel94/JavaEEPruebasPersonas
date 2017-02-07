@@ -1,5 +1,6 @@
 package com.vanesoft.vtrack.webservice.logica.implementacion.seguridad;
 
+import com.vanesoft.vtrack.core.accesodatos.implementacion.FabricaDao;
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
@@ -9,7 +10,6 @@ import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.message.OAuthResponse;
 import  com.vanesoft.vtrack.core.accesodatos.contratos.IDaoCodigoToken;
 import com.vanesoft.vtrack.core.accesodatos.implementacion.DaoCodigoToken;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,12 +24,12 @@ import javax.servlet.http.HttpServletResponse;
  * @since 03/02/2017
  */
 
-public class ComandoGenerarCodigoAutorizacion extends ComandoSeguridad{
+public class ComandoGenerarCodigoAutorizacion extends ComandoSeguridad<CodigoToken>{
 
     //region atributos
     private CodigoToken codigoAutorizacion;
     private HttpServletRequest request;
-    private IDaoCodigoToken daoCodigoToken = new DaoCodigoToken();
+    private IDaoCodigoToken daoCodigoToken = FabricaDao.obtenerDaoCodigoToken();
     //end region
 
     //contructor del comando

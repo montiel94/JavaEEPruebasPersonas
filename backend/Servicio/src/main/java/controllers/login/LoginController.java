@@ -1,19 +1,14 @@
 package controllers.login;
-import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
-import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoSeguridad;
+import com.vanesoft.vtrack.webservice.logica.implementacion.FabricaComando;
+import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoValidarCredencialesUsuario;
 
 /**
  * Sistema:             Vtrack
@@ -42,15 +37,21 @@ public class LoginController {
     public Object doPost(@Context HttpServletRequest request , usuario user){
         // variable que contiene token a generar;
         String token = "";
-        token = getToken(user,request);
+        if (validaCredenciales(user)) {
+            token = getToken(user, request);
+        }
         return token;
 
     }
 
     private String getToken(usuario user,HttpServletRequest request){
-
-        ComandoGenerarCodigoAutorizacion comando = new ComandoGenerarCodigoAutorizacion(request);
+        ComandoGenerarCodigoAutorizacion comando = FabricaComando.obtenerComandoGenerarCodigoAutorizacion(request);
         CodigoToken codigo = comando.ejecutar();
         return codigo.getValor();
+    }
+
+    private Boolean validaCredenciales (usuario user){
+        ComandoValidarCredencialesUsuario comando = FabricaComando.obtenerComandoValidarCredencialesUsuario(user.getPassword(),user.getUsername());
+        return comando.ejecutar();
     }
 }
