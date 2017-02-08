@@ -15,6 +15,7 @@
     <modules>
         <module>Entidades</module>
         <module>Utilidades</module>
+        <module>Excepciones</module>
     </modules>
 
 

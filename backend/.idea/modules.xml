@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/Acessodatos/Implementacion/core.accesodatos.implementacion.iml" filepath="$PROJECT_DIR$/Acessodatos/Implementacion/core.accesodatos.implementacion.iml" />
       <module fileurl="file://$PROJECT_DIR$/Comun/core.comun.iml" filepath="$PROJECT_DIR$/Comun/core.comun.iml" />
       <module fileurl="file://$PROJECT_DIR$/Comun/Entidades/core.comun.entidades.iml" filepath="$PROJECT_DIR$/Comun/Entidades/core.comun.entidades.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Comun/Excepciones/core.comun.excepciones.iml" filepath="$PROJECT_DIR$/Comun/Excepciones/core.comun.excepciones.iml" />
       <module fileurl="file://$PROJECT_DIR$/Comun/Utilidades/core.comun.utilidades.iml" filepath="$PROJECT_DIR$/Comun/Utilidades/core.comun.utilidades.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logica/webservice.logica.iml" filepath="$PROJECT_DIR$/Logica/webservice.logica.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logica/Contratos/webservice.logica.contratos.iml" filepath="$PROJECT_DIR$/Logica/Contratos/webservice.logica.contratos.iml" />

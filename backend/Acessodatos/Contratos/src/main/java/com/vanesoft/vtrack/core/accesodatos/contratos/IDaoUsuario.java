@@ -21,4 +21,22 @@ public interface IDaoUsuario {
      * @since 06/02/2017
      */
     public usuario buscarUsuarioXCorreoElectronico(String Correo);
+    /**
+     * Descripcion: metodo que aumenta un intento de login a un usuario
+     * un correo
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/02/2017
+     */
+    public Boolean aumentarNumeroIntentosLogin (usuario usuarioEnBd);
+    /**
+     * Descripcion: metodo que consulta numero de intentos de login de un usuario
+     * un correo
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/02/2017
+     */
+    public usuario ConsultarNumeroIntentosLoginUsuario (usuario usuarioEnBd);
 }

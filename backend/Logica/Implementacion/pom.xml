@@ -87,5 +87,10 @@
             <artifactId>core.accesodatos.implementacion</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.vanesoft.vtrack.core</groupId>
+            <artifactId>core.comun.excepciones</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

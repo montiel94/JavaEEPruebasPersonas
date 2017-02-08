@@ -25,6 +25,8 @@ public class PropiedadesBase {
      * accesodatos.properties
      */
     public static final String accesodatos = "accesodatos.properties";
+    public static final String logica = "logica.properties";
+    public static final String servicios = "servicios.properties";
 
     private static HashMap<String, Properties> propiedadesList = new HashMap<>();
 

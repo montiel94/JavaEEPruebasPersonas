@@ -9,6 +9,7 @@
         <module name="core.accesodatos.contratos" />
         <module name="core.accesodatos.implementacion" />
         <module name="core.comun.entidades" />
+        <module name="core.comun.excepciones" />
         <module name="core.comun.utilidades" />
         <module name="webservice.logica.contratos" />
         <module name="webservice.logica.implementacion" />
@@ -22,6 +23,7 @@
       <module name="core.accesodatos.implementacion" target="1.5" />
       <module name="core.comun" target="1.5" />
       <module name="core.comun.entidades" target="1.5" />
+      <module name="core.comun.excepciones" target="1.5" />
       <module name="core.comun.utilidades" target="1.7" />
       <module name="webservice.logica" target="1.5" />
       <module name="webservice.logica.contratos" target="1.7" />
