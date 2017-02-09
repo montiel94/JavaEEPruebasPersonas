@@ -1,7 +1,6 @@
 package com.vanesoft.vtrack.core.accesodatos.implementacion;
 
-import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoCodigoToken;
-import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoUsuario;
+import com.vanesoft.vtrack.core.accesodatos.contratos.*;
 
 /**
  * Sistema:                 Vtrack
@@ -46,5 +45,39 @@ public final class FabricaDao {
     public static IDaoUsuario obtenerDaoUsuario(){
         return new DaoUsuario();
     }
+
+    /**
+     * Nombre:                  obtenerDaoPlantilla
+     * Descripcion:             genera el DAO plantilla
+     *
+     * @return el dao
+     * @version 1.0
+     * @author montda
+     * @since 06/02/17
+     */
+    public static IDaoPlantilla obtenerDaoPlantilla(){ return new DaoPlantilla();}
+
+    /**
+     * Nombre:                  obtenerDaoParametro
+     * Descripcion:             genera el DAOParametro
+     *
+     * @return el dao
+     * @version 1.0
+     * @author montda
+     * @since 06/02/17
+     */
+    public static IDaoParametro obtenerDaoParametro(){ return new DaoParametro();}
+
+    /**
+     * Nombre:                  obtenerDaoCorreo
+     * Descripcion:             genera el DAOCorreo
+     *
+     * @return el dao
+     * @version 1.0
+     * @author montda
+     * @since 06/02/17
+     */
+    public static IDaoCorreo obtenerDaoCorreo(){ return new DaoCorreo();}
+
 
 }

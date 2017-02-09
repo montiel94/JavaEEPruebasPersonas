@@ -1,6 +1,7 @@
 package com.vanesoft.vtrack.webservice.logica.implementacion.usuario;
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoUsuario;
 import com.vanesoft.vtrack.core.accesodatos.implementacion.FabricaDao;
+import com.vanesoft.vtrack.core.entidades.EstadoUsuario;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesLogica;
 import com.vanesoft.vtrack.webservice.logica.implementacion.ComandoBase;
@@ -40,25 +41,36 @@ public class ComandoValidarCredencialesUsuario extends ComandoBase<Boolean> {
 
             if (existeUsuario(usuarioEnBd))
             {
-                String contrasenaDesencriptada = CifrarDescifrar.descifrar(usuarioEnBd.getPassword());
-                if (contrasena.equals(contrasenaDesencriptada)){
-                    return true;
-                }
-                else
+                if (usuarioActivo(usuarioEnBd))
                 {
-                    ComandoAumentarNumeroIntentosLogin comandoAumentarNumeroIntentosLogin =
-                            FabricaComando.obtenerComandoAumentarNumeroIntentosLogin(usuarioEnBd);
-                    comandoAumentarNumeroIntentosLogin.ejecutar();
-                    ComandoVerificarBloqueoUsuario comandoVerificarBloqueoUsuario =
-                            FabricaComando.obtenerComandoVerificarBloqueoUsuario(usuarioEnBd);
-                    comandoVerificarBloqueoUsuario.ejecutar();
-                    throw new LogicaException(PropiedadesLogica.ERROR_CREDENCIALES_USUARIO_ERRADAS);
+                    String contrasenaDesencriptada = CifrarDescifrar.descifrar(usuarioEnBd.getPassword());
+                    if (contrasena.equals(contrasenaDesencriptada)) {
+                        daoUsuario.reiniciarIntentosLogin(usuarioEnBd);
+                        return true;
+                    } else {
+                        ComandoAumentarNumeroIntentosLogin comandoAumentarNumeroIntentosLogin =
+                                FabricaComando.obtenerComandoAumentarNumeroIntentosLogin(usuarioEnBd);
+                        comandoAumentarNumeroIntentosLogin.ejecutar();
+                        ComandoVerificarBloqueoUsuario comandoVerificarBloqueoUsuario =
+                                FabricaComando.obtenerComandoVerificarBloqueoUsuario(usuarioEnBd);
+                        comandoVerificarBloqueoUsuario.ejecutar();
+                        throw new LogicaException(PropiedadesLogica.ERROR_CREDENCIALES_USUARIO_ERRADAS);
+                    }
                 }
             }
 
         }catch (LogicaException e) {
             throw new LogicaException(e.getMessage());
         }
+        return false;
+    }
+
+    public boolean usuarioActivo (usuario user)
+    {
+        if (user.getEstadoUsuario().equals(EstadoUsuario.activo))
+            return true;
+        if (user.getEstadoUsuario().equals(EstadoUsuario.bloqueado))
+            throw new LogicaException(PropiedadesLogica.ERROR_USUARIO_BLOQUEADO_INTENTADO_LOGIN);
         return false;
     }
 

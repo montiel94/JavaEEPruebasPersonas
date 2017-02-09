@@ -34,7 +34,7 @@ public class DaoUsuario extends Dao implements IDaoUsuario{
 
             Connection connection = crearConexion();
             Statement stmt = connection.createStatement();
-            String query =   "select ID,CORREO,CONTRASEÑA "+
+            String query =   "select ID,CORREO,CONTRASEÑA,ESTADO,INTENTOSLOGIN,NOMBREEMPRESA "+
                              "FROM VTRACK_USUARIO "+
                              "WHERE CORREO = '"+Correo+"'";
             ResultSet rs = stmt.executeQuery(query);
@@ -43,6 +43,10 @@ public class DaoUsuario extends Dao implements IDaoUsuario{
                 UsuarioenBd.setId(Integer.parseInt(rs.getString("ID")));
                 UsuarioenBd.setUsername(rs.getString("CORREO"));
                 UsuarioenBd.setPassword(rs.getString("CONTRASEÑA"));
+                UsuarioenBd.setEstadoUsuario(rs.getString("ESTADO"));
+                UsuarioenBd.setNombreempresa(rs.getString("NOMBREEMPRESA"));
+                UsuarioenBd.setIntentosLogin(Integer.parseInt(rs.getString("INTENTOSLOGIN")));
+
             }
 
         }catch (Exception e){
@@ -63,7 +67,7 @@ public class DaoUsuario extends Dao implements IDaoUsuario{
             Connection connection = crearConexion();
             Statement stmt = connection.createStatement();
             String query = "UPDATE VTRACK_USUARIO " +
-                           "SET INTENTOSLOGIN = (SELECT INTENTOSLOGIN + 1 FROM VTRACK_USUARIO WHERE CORREO = 'daniel.montiel@gmail.com') "+
+                           "SET INTENTOSLOGIN = (SELECT INTENTOSLOGIN + 1 FROM VTRACK_USUARIO WHERE CORREO = '"+usuarioEnBd.getUsername()+"') "+
                             "WHERE CORREO = '"+usuarioEnBd.getUsername()+"'";
             stmt.execute(query);
             connection.close();
@@ -89,7 +93,7 @@ public class DaoUsuario extends Dao implements IDaoUsuario{
 
             Connection connection = crearConexion();
             Statement stmt = connection.createStatement();
-            String query = "select ID,CORREO,CONTRASEÑA,ESTADO,INTENTOSLOGIN "+
+            String query = "select ID,CORREO,CONTRASEÑA,ESTADO,INTENTOSLOGIN,NOMBREEMPRESA "+
                             "from VTRACK_USUARIO "+
                             "WHERE CORREO = '"+usuarioEnBd.getUsername()+"'";
             ResultSet rs = stmt.executeQuery(query);
@@ -99,6 +103,7 @@ public class DaoUsuario extends Dao implements IDaoUsuario{
                 usuarioEnBd.setUsername(rs.getString("CORREO"));
                 usuarioEnBd.setPassword(rs.getString("CONTRASEÑA"));
                 usuarioEnBd.setEstadoUsuario(rs.getString("ESTADO"));
+                usuarioEnBd.setNombreempresa(rs.getString("NOMBREEMPRESA"));
                 usuarioEnBd.setIntentosLogin(Integer.parseInt(rs.getString("INTENTOSLOGIN")));
             }
         }
@@ -108,6 +113,58 @@ public class DaoUsuario extends Dao implements IDaoUsuario{
         }
         return  usuarioEnBd;
     }
+    /*
+        Descripcion : cambia el estado de un usuario a bloqueado
+        @author : montda
+        @since : 07/02/2017
+        return : boolean de exito
+    */
+    public boolean CambiarEstadoUsuario(usuario usuarioModificando)
+    {
+        try
+        {
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE VTRACK_USUARIO "+
+                           "SET ESTADO = '"+usuarioModificando.getEstadoUsuario()+"' "+
+                           "WHERE CORREO = '"+usuarioModificando.getUsername()+"'";
+            stmt.execute(query);
+            connection.close();
+            return true;
+        }
+        catch (Exception e)
+        {
+
+        }
+        return false;
+    }
+
+    /*
+        Descripcion : reinicio el conteo de intentos de login fallidos
+        @author : montda
+        @since : 07/02/2017
+        return : boolean de exito
+    */
+    public boolean reiniciarIntentosLogin(usuario usuarioModificando)
+    {
+        try
+        {
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE VTRACK_USUARIO " +
+                           "SET INTENTOSLOGIN = 0 "+
+                           "WHERE CORREO = '"+usuarioModificando.getUsername()+"'";
+            stmt.execute(query);
+            connection.close();
+            return true;
+        }
+        catch (Exception e)
+        {
+
+        }
+        return false;
+    }
+
 
 
 }

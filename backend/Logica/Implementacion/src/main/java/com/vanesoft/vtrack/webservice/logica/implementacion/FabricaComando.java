@@ -1,8 +1,10 @@
 package com.vanesoft.vtrack.webservice.logica.implementacion;
 
 import com.vanesoft.vtrack.core.entidades.usuario;
+import com.vanesoft.vtrack.webservice.logica.implementacion.correo.ComandoEnviarCorreo;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
 import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoAumentarNumeroIntentosLogin;
+import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoCambiarEstadoUsuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoValidarCredencialesUsuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoVerificarBloqueoUsuario;
 
@@ -78,5 +80,31 @@ public final class FabricaComando {
      */
     public static ComandoVerificarBloqueoUsuario obtenerComandoVerificarBloqueoUsuario(usuario usuarioEnBd){
         return new ComandoVerificarBloqueoUsuario (usuarioEnBd);
+    }
+
+    /**
+     * Nombre:                  ComandoCambiarEstadoUsuario
+     * Descripcion:             genera el comando ComandoCambiarEstadoUsuario
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 06/02/17
+     */
+    public static ComandoCambiarEstadoUsuario obtenerComandoCambiarEstadoUsuario(usuario usuarioEnBd){
+        return new ComandoCambiarEstadoUsuario (usuarioEnBd);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoEnviarCorreo
+     * Descripcion:             genera el comando ComandoEnviarCorreo
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 06/02/17
+     */
+    public static ComandoEnviarCorreo obtenerComandoEnviarCorreo(usuario usuarioEnBd){
+        return new ComandoEnviarCorreo (usuarioEnBd);
     }
 }

@@ -39,4 +39,20 @@ public interface IDaoUsuario {
      * @since 06/02/2017
      */
     public usuario ConsultarNumeroIntentosLoginUsuario (usuario usuarioEnBd);
+    /**
+     * Descripcion: metodo que modifica el estado de un usuario
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/02/2017
+     */
+    public boolean CambiarEstadoUsuario(usuario usuarioModificando);
+    /**
+     * Descripcion: metodo que reinicia el conteo de intentos de login fallidos
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/02/2017
+     */
+    public boolean reiniciarIntentosLogin(usuario usuarioModificando);
 }

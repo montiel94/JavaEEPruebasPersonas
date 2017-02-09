@@ -23,7 +23,13 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vanesoft.vtrack.core</groupId>
+            <artifactId>core.comun.entidades</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>

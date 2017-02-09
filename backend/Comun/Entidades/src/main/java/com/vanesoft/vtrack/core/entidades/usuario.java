@@ -8,7 +8,17 @@ public class usuario extends EntidadBase{
     public String username;
     public String password;
     public int intentosLogin;
-    public EstadoUsuario estadoUsuario;
+    public String estadoUsuario;
+
+    public String getNombreempresa() {
+        return nombreempresa;
+    }
+
+    public void setNombreempresa(String nombreempresa) {
+        this.nombreempresa = nombreempresa;
+    }
+
+    public String nombreempresa;
 
     public void setPassword(String password) {
         this.password = password;
@@ -22,9 +32,9 @@ public class usuario extends EntidadBase{
 
     public void setIntentosLogin(int intentosLogin) {this.intentosLogin = intentosLogin;}
 
-    public EstadoUsuario getEstadoUsuario() {return estadoUsuario;}
+    public String getEstadoUsuario() {return estadoUsuario;}
 
-    public void setEstadoUsuario(String estadoUsuario) {EstadoUsuario.valueOf(estadoUsuario);}
+    public void setEstadoUsuario(String estadoUsuario) {this.estadoUsuario = estadoUsuario;}
 
     public String getUsername() {
         return username;

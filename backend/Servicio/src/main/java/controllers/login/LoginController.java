@@ -14,6 +14,7 @@ import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoValid
 import com.vanesoft.vtrack.core.excepciones.LogicaException;
 import controllers.BaseController;
 
+
 /**
  * Sistema:             Vtrack
  * Nombre:              LoginControler
@@ -65,6 +66,8 @@ public class LoginController extends BaseController{
         return comando.ejecutar();
     }
 
+
+
     public Object obtenerMensajeDeError(LogicaException e ) {
         if (e.getMessage().contains(PropiedadesLogica.ERROR_CREDENCIALES_USUARIO_ERRADAS.substring(0,
                 PropiedadesLogica.ERROR_CREDENCIALES_USUARIO_ERRADAS.length() - 3)))
@@ -75,6 +78,18 @@ public class LoginController extends BaseController{
                 PropiedadesLogica.ERROR_USUARIO_NO_ENCONTRADO_EN_VTRACK.length() - 3)))
         {
             getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_USUARIO_NO_ENCONTRADO);
+        }
+
+        if (e.getMessage().contains(PropiedadesLogica.ERROR_USUARIO_HA_SIDO_BLOQUEADO.substring(0,
+                PropiedadesLogica.ERROR_USUARIO_HA_SIDO_BLOQUEADO.length() - 3)))
+        {
+            getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_USUARIO_BLOQUEADO);
+        }
+
+        if (e.getMessage().contains(PropiedadesLogica.ERROR_USUARIO_BLOQUEADO_INTENTADO_LOGIN.substring(0,
+                PropiedadesLogica.ERROR_USUARIO_BLOQUEADO_INTENTADO_LOGIN.length() - 3)))
+        {
+            getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_USUARIO_BLOQUEADO_INTENTANDO_LOGIN);
         }
 
         return super.obtenerMensajeDeError(e);
