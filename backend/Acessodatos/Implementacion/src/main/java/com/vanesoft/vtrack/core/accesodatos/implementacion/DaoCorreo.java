@@ -2,8 +2,11 @@ package com.vanesoft.vtrack.core.accesodatos.implementacion;
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoParametro;
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoPlantilla;
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoCorreo;
+import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoUsuario;
 import com.vanesoft.vtrack.core.entidades.*;
 import com.vanesoft.vtrack.core.utilidades.propiedades.Armador;
+import com.vanesoft.vtrack.core.utilidades.propiedades.CifrarDescifrar;
+import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesAccesoDatos;
 
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
@@ -11,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Properties;
+import java.util.Random;
 /**
  * Created by Daniel jose on 08/02/2017.
  */
@@ -19,12 +23,17 @@ public class DaoCorreo implements IDaoCorreo{
     public void enviarCorreo(Correo correoEnviando)
     {
         Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-        props.put("mail.smtp.mail.sender",correoEnviando.getUser());
-        props.put("mail.smtp.user",correoEnviando.getUser());
+        props.put(PropiedadesAccesoDatos.CONFIG_MAILSMTPPAUTH,
+                PropiedadesAccesoDatos.CONFIG_MAILSMTPAUTHVALOR);
+        props.put(PropiedadesAccesoDatos.CONFIG_MAILSMTPSTARTTLSENABLE,
+                PropiedadesAccesoDatos.CONFIG_MAILSMTPSTARTTLSENABLEVALOR);
+        props.put(PropiedadesAccesoDatos.CONFIG_MAILSMTPHOST,
+                PropiedadesAccesoDatos.CONFIG_MAILSMTPHOSTVALOR);
+        props.put(PropiedadesAccesoDatos.CONFIG_MAILSMTPPORT,
+                PropiedadesAccesoDatos.CONFIG_MAILSMTPPORTVALOR);
+        props.put(PropiedadesAccesoDatos.CONFIG_MAILSMTPMAILSENDER,
+                correoEnviando.getUser());
+        props.put(PropiedadesAccesoDatos.CONFIG_MAILSMTPUSER,correoEnviando.getUser());
         Session session = Session.getDefaultInstance(props);
         try {
 
@@ -34,9 +43,11 @@ public class DaoCorreo implements IDaoCorreo{
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(correoEnviando.getTo()));
             message.setSubject(correoEnviando.getAsunto());
-            message.setContent(correoEnviando.getMensaje(),"text/html; charset=utf-8");
-            Transport t = session.getTransport("smtp");
-            t.connect((String)props.get("mail.smtp.user"),correoEnviando.getUserPassword() );
+            message.setContent(correoEnviando.getMensaje(),
+                    PropiedadesAccesoDatos.CONFIG_SETCONTENT);
+            Transport t = session.getTransport(PropiedadesAccesoDatos.CONFIG_MAILGETTRANSPORTE);
+            t.connect((String)props.get(PropiedadesAccesoDatos.CONFIG_MAILSMTPUSER),
+                    correoEnviando.getUserPassword() );
             t.sendMessage(message, message.getAllRecipients());
             t.close();
 
@@ -48,18 +59,45 @@ public class DaoCorreo implements IDaoCorreo{
 
     public void envioCorreoUsuarioXIntentosLogin (usuario usuarioEnviarCorreo)
     {
-        IDaoPlantilla daoPlantilla = FabricaDao.obtenerDaoPlantilla();
-        Plantilla plantillaEnBd = daoPlantilla.consultarPlantilla(TipoPlantilla.usuariobloqueadointentoslogin);
-        IDaoParametro daoParametro = FabricaDao.obtenerDaoParametro();
-        ArrayList parametrosPlantillaEnBd = daoParametro.consultarParametrosXPlantilla(TipoPlantilla.usuariobloqueadointentoslogin);
-        Hashtable<String,String> valores = new Hashtable<String, String>();
-        valores.put(ParametroMensaje.nombreParametroNombreUsuario,usuarioEnviarCorreo.getNombreempresa());
-        valores.put(ParametroMensaje.NombreParametroPassword,"n0QSAsRu9VQ0cpp0ydMBMQ==");
-        String MensajeFinal = Armador.armarMensaje(plantillaEnBd.getTexto(),parametrosPlantillaEnBd,valores);
-        Correo correoEnviando = new Correo(usuarioEnviarCorreo.username,
-                usuarioEnviarCorreo.getUsername(),"Panta1994-",plantillaEnBd.getTitulo(),
-                MensajeFinal);
-        enviarCorreo(correoEnviando);
+        try {
+            String nuevaContrasena = "";
+            String nuevaContrasenaEncriptada = "";
+            IDaoUsuario daoUsuario = FabricaDao.obtenerDaoUsuario();
+            IDaoPlantilla daoPlantilla = FabricaDao.obtenerDaoPlantilla();
+            Plantilla plantillaEnBd = daoPlantilla.consultarPlantilla(TipoPlantilla.usuariobloqueadointentoslogin);
+            IDaoParametro daoParametro = FabricaDao.obtenerDaoParametro();
+            nuevaContrasena = generarContrasenaProvisional(Integer.valueOf(PropiedadesAccesoDatos.CONFIG_TAMANO_CONTRASENA));
+            nuevaContrasenaEncriptada = CifrarDescifrar.cifrar(nuevaContrasena);
+            ArrayList parametrosPlantillaEnBd = daoParametro.consultarParametrosXPlantilla(TipoPlantilla.usuariobloqueadointentoslogin);
+            Hashtable<String, String> valores = new Hashtable<String, String>();
+            valores.put(ParametroMensaje.nombreParametroNombreUsuario, usuarioEnviarCorreo.getNombreempresa());
+            valores.put(ParametroMensaje.NombreParametroPassword, nuevaContrasena);
+            String MensajeFinal = Armador.armarMensaje(plantillaEnBd.getTexto(), parametrosPlantillaEnBd, valores);
+            Correo correoEnviando = new Correo(PropiedadesAccesoDatos.CONFIG_CORREO_REMINENTE,
+                    usuarioEnviarCorreo.getUsername(), PropiedadesAccesoDatos.CONFIG_CONTRASENA_REMINENTE, plantillaEnBd.getTitulo(),
+                    MensajeFinal);
+            enviarCorreo(correoEnviando);
+            daoUsuario.modificarContrasenaUsuario(usuarioEnviarCorreo, nuevaContrasenaEncriptada);
+        }catch (Exception e)
+        {
+
+        }
+    }
+
+    public String generarContrasenaProvisional(int longitud)
+    {
+        String cadenaAleatoria = "";
+        long milis = new java.util.GregorianCalendar().getTimeInMillis();
+        Random r = new Random(milis);
+        int i = 0;
+        while ( i < longitud){
+            char c = (char)r.nextInt(255);
+            if ( (c >= '0' && c <='9') || (c >='A' && c <='Z') ){
+                cadenaAleatoria += c;
+                i ++;
+            }
+        }
+        return cadenaAleatoria;
     }
 
 }

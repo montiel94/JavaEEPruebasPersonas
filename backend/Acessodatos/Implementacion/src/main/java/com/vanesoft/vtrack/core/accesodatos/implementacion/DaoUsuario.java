@@ -165,6 +165,32 @@ public class DaoUsuario extends Dao implements IDaoUsuario{
         return false;
     }
 
+    /*
+        Descripcion : modifica la contrasena de un usuario
+        @author : montda
+        @since : 07/02/2017
+        return : boolean de exito
+    */
+    public boolean modificarContrasenaUsuario(usuario usuarioModificando,String contrasena)
+    {
+        try
+        {
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE VTRACK_USUARIO " +
+                    "SET CONTRASEÑA = '"+contrasena+"' "+
+                    "WHERE CORREO = '"+usuarioModificando.getUsername()+"'";
+            stmt.execute(query);
+            connection.close();
+
+        }
+        catch (Exception e)
+        {
+
+        }
+        return true;
+    }
+
 
 
 }

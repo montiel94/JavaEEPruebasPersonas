@@ -23,4 +23,11 @@ public class pruebaCorreo extends TestCase{
                 mensaje);
         daoCorreo.enviarCorreo(correoEnviado);
     }
+
+    public void testGenerarContrasena()
+    {
+        String contrasena = "hola";
+        DaoCorreo daoCorreo = new DaoCorreo();
+        assertEquals(contrasena,daoCorreo.generarContrasenaProvisional(8));
+    }
 }

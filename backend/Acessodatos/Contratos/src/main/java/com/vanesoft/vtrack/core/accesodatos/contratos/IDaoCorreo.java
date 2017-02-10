@@ -9,5 +9,7 @@ public interface IDaoCorreo {
 
     public void envioCorreoUsuarioXIntentosLogin (usuario usuarioEnviarCorreo);
 
+    public String generarContrasenaProvisional(int longitud);
+
 
 }

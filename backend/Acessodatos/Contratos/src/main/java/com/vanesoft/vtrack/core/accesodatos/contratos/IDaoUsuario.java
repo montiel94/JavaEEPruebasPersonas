@@ -55,4 +55,12 @@ public interface IDaoUsuario {
      * @since 06/02/2017
      */
     public boolean reiniciarIntentosLogin(usuario usuarioModificando);
+    /**
+     * Descripcion: metodo que modifica la contrasena de un usuario
+     *
+     * @version 1.0
+     * @author montda
+     * @since 09/02/2017
+     */
+    public boolean modificarContrasenaUsuario(usuario usuarioModificando,String contrasena);
 }

@@ -1,23 +1,31 @@
 
 
 <div class="form">
+    <div class = "box">
 <form name="loginUserForm" >
     <fieldset>
         <img src="images/logo_refidomsa.png"/> <br/><br/>
         <div class="row">
             <div class="large-12 columns">
-                <label style = "width: 10%; ">Correo electronico</label>
-                <input type="text" required placeholder="Introduce tu usuario" style="border: 1px solid #ccc; border-radius: 4px;box-sizing: border-box;  padding: 6px 10px;" id = "user" ng-model="user">
+                <label class = "labellogin">Correo electronico</label>
+                <input type="text" required placeholder="Introduce tu usuario" class="inputlogin" id = "user" ng-model="user">
             </div>
+            <br/>
+            <br/>
             <br/>
             <div class="large-12 columns">
-                <label style = "width: 10%;">Contraseña</label>
-                <input type="password" required placeholder="Introduce tu password" style="border: 1px solid #ccc; border-radius: 4px;box-sizing: border-box;  padding: 6px 10px;" id = "password" ng-model="password">
+                <label class = "labellogin">Contraseña</label>
+                <input type="password" required placeholder="Introduce tu password" class="inputlogin" id = "password" ng-model="password">
             </div>
             <br/>
-            <button type="submit" ng-disabled="!loginUserForm.$valid" ng-click="accionBtnAceptar()" class="button expand round" style = "background-color: #000050;color: white; padding: 6px 10px;margin: 8px 0;border: none;border-radius: 4px;cursor: pointer;">Entrar</button>
+
         </div>
+        <br/>
+        <button type="submit" ng-disabled="!loginUserForm.$valid" ng-click="accionBtnAceptar()" class="button expand round" style = "background-color: #000050;color: white; padding: 6px 10px;margin: 8px 0;border: none;border-radius: 4px;cursor: pointer;">Entrar</button>
         <div data-ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger">{{errorMessage}}</div>
     </fieldset>
 </form>
+    </div>
+    <p>Forgot your password? <u style="color:#000050;">Click Here!</u></p>
+
 </div>

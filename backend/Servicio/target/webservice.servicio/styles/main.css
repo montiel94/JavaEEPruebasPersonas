@@ -88,4 +88,32 @@ body {
     right:0;
     left:0;
   }
+
+  .box{
+    background:white;
+    width:400px;
+    border-radius:6px;
+    margin: 0 auto 0 auto;
+    padding:0px 5px 15px 6px;
+    border: #2980b9 4px solid;
+  }
+
+  .labellogin{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 170px;
+    text-align: right;
+    padding: 6px 10px;
+  }
+
+  .inputlogin{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 6px 10px;
+    width: 200px;
+    float: left;
+
+  }
 }
