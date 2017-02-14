@@ -3,10 +3,7 @@ package com.vanesoft.vtrack.webservice.logica.implementacion;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.correo.ComandoEnviarCorreo;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
-import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoAumentarNumeroIntentosLogin;
-import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoCambiarEstadoUsuario;
-import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoValidarCredencialesUsuario;
-import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoVerificarBloqueoUsuario;
+import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -106,5 +103,18 @@ public final class FabricaComando {
      */
     public static ComandoEnviarCorreo obtenerComandoEnviarCorreo(usuario usuarioEnBd){
         return new ComandoEnviarCorreo (usuarioEnBd);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoConsultarUsuarioBloqueado
+     * Descripcion:             genera el comando ComandoConsultarUsuarioBloqueado
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 13/02/17
+     */
+    public static ComandoConsultarUsuarioBloqueado obtenerComandoConsultarUsuarioBloqueado(usuario usuarioEnBd){
+        return new ComandoConsultarUsuarioBloqueado (usuarioEnBd);
     }
 }

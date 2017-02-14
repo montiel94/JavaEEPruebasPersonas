@@ -19,7 +19,8 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
-        'webAppVtrackApp.services'
+        'webAppVtrackApp.services',
+        'webAppVtrackApp.ModalService'
     ]).constant("BASE_URL", "http://localhost:8080/webservice.servicio/api")
     .config(function ($routeProvider) {
         $routeProvider

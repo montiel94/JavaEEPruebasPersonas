@@ -1,0 +1,36 @@
+<div class="modal fade">
+    <div class="modal-dialog"><style>.modal-dialog {width: 300px;} </style>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body" id = "modalbody">
+                <p> Su nueva contraseña debe cumplir con los siguientes requisitos :</p>
+                <p>1 - Debe contener aunque sea 1 letra</p>
+                <p>2 - Debe contener aunque sea 1 número</p>
+                <p>3 - Debe tener una longitud mayor de 6</p>
+                <p>Ingrese su nueva contraseña </p>
+
+                <form class="form-horizontal" role="form">
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <input type="password" required placeholder="Introduzca su nueva contraseña" class="inputCambioPassword" id = "password" ng-model="password">
+                            <br/>
+                            <br/>
+                            <br/>
+                            <input type="password" required placeholder="Confirme su nueva contraseña" class="inputCambioPassword" id = "passwordConfirmacion" ng-model="passwordConfirmacion">
+                        </div>
+                    </div>
+                </form>
+                <div data-ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger">{{errorMessage}}</div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="cambiarPassword()" class="btn btn-primary">OK</button>
+                <button type="button" ng-click="cancel()" class="btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

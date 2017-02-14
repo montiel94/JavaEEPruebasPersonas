@@ -116,4 +116,26 @@ body {
     float: left;
 
   }
+
+  .inputCambioPassword{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 6px 10px;
+    width: 270px;
+    float: left;
+  }
+
+  .inputUsuarioBloqueado{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 6px 10px;
+    width: 200px;
+
+  }
+
+  .app-modal-window .modal-dialog {
+    width: 10px;
+  }
 }

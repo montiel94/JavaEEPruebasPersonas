@@ -14,10 +14,18 @@ import java.util.Properties;
  */
 public class PropiedadesServicios extends PropiedadesBase {
 
-    public static final String RESPUESTA_AUTENTICACION_ERRADA = get("respuesta.autenticacionErrada");
-    public static final String RESPUESTA_USUARIO_NO_ENCONTRADO = get("respuesta.usuarionoencontrado");
-    public static final String RESPUESTA_USUARIO_BLOQUEADO = get("respuesta.usuariobloquedo");
-    public static final String RESPUESTA_USUARIO_BLOQUEADO_INTENTANDO_LOGIN = get("respuesta.usuariobloqueadointentandologin");
+    public static final String RESPUESTA_AUTENTICACION_ERRADA
+            = get("respuesta.autenticacionErrada");
+    public static final String RESPUESTA_USUARIO_NO_ENCONTRADO
+            = get("respuesta.usuarionoencontrado");
+    public static final String RESPUESTA_USUARIO_BLOQUEADO =
+            get("respuesta.usuariobloquedo");
+    public static final String RESPUESTA_USUARIO_BLOQUEADO_INTENTANDO_LOGIN
+            = get("respuesta.usuariobloqueadointentandologin");
+    public static final String RESPUESTA_USUARIO_ACTIVO_INTENTANDO_DESBLOQUEO
+            = get("respuesta.usuarioactivointentantodesbloqueo");
+    public static final String RESPUESTA_USUARIO_BLOQUEDA_AUTENTICACION_ERRADA
+            = get("respuesta.usuariobloqueadocredencialerrada ");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

@@ -11,6 +11,36 @@ angular.module('webAppVtrackApp.services')
 function ServicioLogin($q,$rootScope,$http,BASE_URL)
 {
     this.login = login;
+    this.validarUsuarioBloqueado = validarUsuarioBloqueado;
+
+    function validarUsuarioBloqueado(login,password) {
+        console.log('entrando al metodo validarUsuarioBloqueado');
+        var defered = $q.defer();
+        var promise = defered.promise;
+        var usuario = {"username": login,"password": password};
+        console.log('saliendo del metodo validarUsuarioBloqueado');
+        $http
+        ({
+            method: 'post',
+            url: BASE_URL + '/usuario/password',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(usuario)
+        }).then(function success(response)
+        {
+            //console.log(response);
+            //defered.resolve(response.data);
+        },function error(response)
+        {
+            //console.log('error: '+response);
+            //var error = response.data;
+            //defered.reject(error.mensaje);
+        });
+
+        return promise;
+
+    }
 
     function login(login,password) {
         var defered = $q.defer();
