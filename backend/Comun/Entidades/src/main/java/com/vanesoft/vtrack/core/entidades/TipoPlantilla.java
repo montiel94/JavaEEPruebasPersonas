@@ -6,5 +6,5 @@ package com.vanesoft.vtrack.core.entidades;
 public class TipoPlantilla {
 
     public static final String usuariobloqueadointentoslogin = "CORREO BLOQUEO DE USUARIO POR INTENTOS FALLIDOS LOGIN";
-
+    public static final String usuarioolvidocontrasena = "USUARIO OLVIDO CONTRASENA";
 }

@@ -11,5 +11,6 @@ public interface IDaoCorreo {
 
     public String generarContrasenaProvisional(int longitud);
 
+    public Boolean envioCorreoUsuarioParametrizado (usuario usuarioEnviarCorreo,String tipoPlantillaa);
 
 }

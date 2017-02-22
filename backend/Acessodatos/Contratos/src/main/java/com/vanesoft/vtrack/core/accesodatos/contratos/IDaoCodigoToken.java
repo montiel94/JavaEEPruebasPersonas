@@ -1,5 +1,7 @@
 package com.vanesoft.vtrack.core.accesodatos.contratos;
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
+import com.vanesoft.vtrack.core.entidades.usuario;
+
 /**
  * Sistema:             Vtrack
  * Nombre:              IDaoCodigoToken
@@ -17,5 +19,5 @@ public interface IDaoCodigoToken {
      * @author montda
      * @since 04/02/2017
      */
-    public boolean guardarCodigoToken(CodigoToken codigo);
+    public boolean guardarCodigoToken(CodigoToken codigo, usuario user);
 }

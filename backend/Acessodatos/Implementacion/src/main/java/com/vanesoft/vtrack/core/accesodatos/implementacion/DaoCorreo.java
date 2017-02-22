@@ -11,6 +11,7 @@ import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesAccesoDatos;
 import javax.mail.*;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.InternetAddress;
+import java.net.CookieHandler;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Properties;
@@ -84,6 +85,46 @@ public class DaoCorreo implements IDaoCorreo{
         }
     }
 
+    private boolean armarCorreoUsuarioOlvidoContrasena(usuario usuarioEnviarCorreo)
+    {
+        boolean exito = false;
+        IDaoUsuario  daoUsuario = FabricaDao.obtenerDaoUsuario();
+        IDaoPlantilla daoPlantilla = FabricaDao.obtenerDaoPlantilla();
+        Plantilla plantillaEnBd = daoPlantilla.consultarPlantilla(TipoPlantilla.usuarioolvidocontrasena);
+        IDaoParametro daoParametro = FabricaDao.obtenerDaoParametro();
+        String nuevaContrasena = generarContrasenaProvisional(Integer.valueOf(PropiedadesAccesoDatos.CONFIG_TAMANO_CONTRASENA));
+        String nuevaContrasenaEncriptada = CifrarDescifrar.cifrar(nuevaContrasena);
+        ArrayList parametrosPlantillaEnBd = daoParametro.consultarParametrosXPlantilla(TipoPlantilla.usuarioolvidocontrasena);
+        Hashtable<String, String> valores = new Hashtable<String, String>();
+        valores.put(ParametroMensaje.nombreParametroNombreUsuario, usuarioEnviarCorreo.getNombreempresa());
+        valores.put(ParametroMensaje.NombreParametroPassword, nuevaContrasena);
+        String MensajeFinal = Armador.armarMensaje(plantillaEnBd.getTexto(), parametrosPlantillaEnBd, valores);
+        Correo correoEnviando = new Correo(PropiedadesAccesoDatos.CONFIG_CORREO_REMINENTE,
+                usuarioEnviarCorreo.getUsername(), PropiedadesAccesoDatos.CONFIG_CONTRASENA_REMINENTE, plantillaEnBd.getTitulo(),
+                MensajeFinal);
+        enviarCorreo(correoEnviando);
+        daoUsuario.modificarContrasenaUsuario(usuarioEnviarCorreo, nuevaContrasenaEncriptada);
+
+        exito = true;
+        return exito;
+    }
+
+    public Boolean envioCorreoUsuarioParametrizado (usuario usuarioEnviarCorreo,String tipoPlantillaa)
+    {
+        Boolean exito = false;
+        Correo correoAEnviar = null;
+        try
+        {
+            if (tipoPlantillaa.equals(TipoPlantilla.usuarioolvidocontrasena))
+                 armarCorreoUsuarioOlvidoContrasena(usuarioEnviarCorreo);
+            exito = true;
+
+        }catch (Exception e)
+        {
+
+        }
+        return exito;
+    }
     public String generarContrasenaProvisional(int longitud)
     {
         String cadenaAleatoria = "";

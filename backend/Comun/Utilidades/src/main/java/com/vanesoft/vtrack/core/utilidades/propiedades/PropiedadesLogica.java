@@ -14,14 +14,20 @@ import java.util.Properties;
  */
 public class PropiedadesLogica extends PropiedadesBase {
 
-    public static final String ERROR_CREDENCIALES_USUARIO_ERRADAS = get("error.credencialeserradas");
-    public static final String ERROR_USUARIO_NO_ENCONTRADO_EN_VTRACK = get("error.usuarionoencontrado");
-    public static final String ERROR_USUARIO_HA_SIDO_BLOQUEADO = get("error.usuariohasidobloqueado");
-    public static final String ERROR_USUARIO_BLOQUEADO_INTENTADO_LOGIN = get("error.usuariobloqueado");
+    public static final String ERROR_CREDENCIALES_USUARIO_ERRADAS
+            = get("error.credencialeserradas");
+    public static final String ERROR_USUARIO_NO_ENCONTRADO_EN_VTRACK
+            = get("error.usuarionoencontrado");
+    public static final String ERROR_USUARIO_HA_SIDO_BLOQUEADO
+            = get("error.usuariohasidobloqueado");
+    public static final String ERROR_USUARIO_BLOQUEADO_INTENTADO_LOGIN
+            = get("error.usuariobloqueado");
     public static final String ERROR_USUARIO_INTENTANDO_DESBLOQUEO_LOGIN_FALLIDO
             = get("error.usuariointentadodesbloqueologinerrado");
     public static final String ERROR_USUARIO_ACTIVO_INTENTANDO_DESBLOQUEO
             = get("error.usuarioactivointentandodesbloqueo");
+    public static final String ERROR_USUARIO_NO_ES_NUEVO =
+            get("error.usuarionoesnuevo");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

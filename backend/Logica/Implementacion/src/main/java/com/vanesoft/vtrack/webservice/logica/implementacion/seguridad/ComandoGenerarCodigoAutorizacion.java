@@ -2,6 +2,7 @@ package com.vanesoft.vtrack.webservice.logica.implementacion.seguridad;
 
 import com.vanesoft.vtrack.core.accesodatos.implementacion.FabricaDao;
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
+import com.vanesoft.vtrack.core.entidades.usuario;
 import org.apache.oltu.oauth2.as.issuer.MD5Generator;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuer;
 import org.apache.oltu.oauth2.as.issuer.OAuthIssuerImpl;
@@ -30,13 +31,15 @@ public class ComandoGenerarCodigoAutorizacion extends ComandoSeguridad<CodigoTok
     private CodigoToken codigoAutorizacion;
     private HttpServletRequest request;
     private IDaoCodigoToken daoCodigoToken = FabricaDao.obtenerDaoCodigoToken();
+    private usuario user;
     //end region
 
     //contructor del comando
-    public ComandoGenerarCodigoAutorizacion(HttpServletRequest request)
+    public ComandoGenerarCodigoAutorizacion(HttpServletRequest request, usuario user)
     {
         this.request = request;
         codigoAutorizacion = new CodigoToken();
+        this.user = user;
     }
       /*
         Descripcion metodo que ejecuta comando
@@ -54,7 +57,7 @@ public class ComandoGenerarCodigoAutorizacion extends ComandoSeguridad<CodigoTok
                      .buildJSONMessage( );
              String codigo = getCodigoToken(respuesta);
              registrarCodigoAutorizacion(codigo);
-             daoCodigoToken.guardarCodigoToken(codigoAutorizacion);
+             daoCodigoToken.guardarCodigoToken(codigoAutorizacion,user);
 
          }
          catch (OAuthSystemException e)

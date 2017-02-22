@@ -36,8 +36,9 @@ public final class FabricaComando {
      * @author montda
      * @since 06/02/17
      */
-    public static ComandoGenerarCodigoAutorizacion obtenerComandoGenerarCodigoAutorizacion(HttpServletRequest request){
-        return new ComandoGenerarCodigoAutorizacion(request);
+    public static ComandoGenerarCodigoAutorizacion obtenerComandoGenerarCodigoAutorizacion(HttpServletRequest request
+            ,usuario user){
+        return new ComandoGenerarCodigoAutorizacion(request,user);
     }
 
     /**
@@ -116,5 +117,44 @@ public final class FabricaComando {
      */
     public static ComandoConsultarUsuarioBloqueado obtenerComandoConsultarUsuarioBloqueado(usuario usuarioEnBd){
         return new ComandoConsultarUsuarioBloqueado (usuarioEnBd);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoConsultarUsuarioBloqueado
+     * Descripcion:             genera el comando ComandoConsultarUsuarioBloqueado
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 13/02/17
+     */
+    public static ComandoModificarPasswordUsuario obtenerComandoModificarPasswordUsuario(usuario usuarioEnBd,
+                                                                                         String passwordNueva){
+        return new ComandoModificarPasswordUsuario (usuarioEnBd,passwordNueva);
+    }
+    /**
+     * Nombre:                  obtenerComandoConsultarUsuario
+     * Descripcion:             genera el comando ComandoConsultarUsuario
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 13/02/17
+     */
+    public static ComandoConsultarUsuario obtenerComandoConsultarUsuario(usuario usuarioEnBd){
+        return new ComandoConsultarUsuario (usuarioEnBd);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoConsultarUsuario
+     * Descripcion:             genera el comando ComandoConsultarUsuario
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 13/02/17
+     */
+    public static ComandoEnviarCorreoParametrizado obtenerComandoEnviarCorreoParametrizado(usuario usuarioEnBd,String tipoPlantilla){
+        return new ComandoEnviarCorreoParametrizado (tipoPlantilla,usuarioEnBd);
     }
 }

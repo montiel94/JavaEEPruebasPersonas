@@ -7,5 +7,5 @@ public class EstadoUsuario {
 
     public static final String bloqueado = "BLOQUEADO";
     public static final String activo = "ACTIVO";
-
+    public static final String nuevo = "NUEVO";
 }

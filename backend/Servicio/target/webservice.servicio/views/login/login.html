@@ -8,27 +8,27 @@
                 <div class="row">
                     <div class="large-12 columns">
                         <label class = "labellogin">Correo electronico</label>
-                        <input type="text" required placeholder="Introduce tu usuario" class="inputlogin" id = "user" ng-model="user">
+                        <input type="text"  placeholder="Introduce tu usuario" class="inputlogin" id = "user" ng-model="user">
                     </div>
                     <br/>
                     <br/>
                     <br/>
                     <div class="large-12 columns">
                         <label class = "labellogin">Contraseña</label>
-                        <input type="password" required placeholder="Introduce tu password" class="inputlogin" id = "password" ng-model="password">
+                        <input type="password"  placeholder="Introduce tu password" class="inputlogin" id = "password" ng-model="password">
                     </div>
                     <br/>
 
                 </div>
                 <br/>
                 <button type="submit"  ng-click="accionBtnAceptar()" class="button expand round" style = "background-color: #000050;color: white; padding: 6px 10px;margin: 8px 0;border: none;border-radius: 4px;cursor: pointer;">Entrar</button>
-
+                <button type="submit"  ng-click="accionBtnAutoRegistro()" class="button expand round" style = "background-color: #000050;color: white; padding: 6px 10px;margin: 8px 0;border: none;border-radius: 4px;cursor: pointer;">Autoregistro</button>
             </fieldset>
         </form>
     </div>
-    <md-button class="md-primary"><a  href ng-click="showComplex()">¿Tu usuario se encuentra bloquedo?</a> | <a ng-href=" http://google.com">¿Olvidaste tu contraseña?</a> </md-button>
+    <md-button class="md-primary"><a  href ng-click="accionBotonUsuarioBloqueado ()">¿Tu usuario se encuentra bloquedo?</a> | <a href ng-click="accionBotonOlvidasteContrasena ()">¿Olvidaste tu contraseña?</a> </md-button>
     <br/>
     <br/>
-    <div data-ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger">{{errorMessage}}</div>
+    <div data-ng-show="showError" id = "zonaerror" ng-class="{fade:doFade}">{{errorMessage}}</div>
 
 </div>

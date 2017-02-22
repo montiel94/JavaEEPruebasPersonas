@@ -25,7 +25,9 @@ public class PropiedadesServicios extends PropiedadesBase {
     public static final String RESPUESTA_USUARIO_ACTIVO_INTENTANDO_DESBLOQUEO
             = get("respuesta.usuarioactivointentantodesbloqueo");
     public static final String RESPUESTA_USUARIO_BLOQUEDA_AUTENTICACION_ERRADA
-            = get("respuesta.usuariobloqueadocredencialerrada ");
+            = get("respuesta.usuariobloqueadocredencialerrada");
+    public static final String  RESPUESTA_USUARIO_NO_POSEE_ESTADO_NUEVO
+            =get("respuesta.usuarionoesnuevo");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

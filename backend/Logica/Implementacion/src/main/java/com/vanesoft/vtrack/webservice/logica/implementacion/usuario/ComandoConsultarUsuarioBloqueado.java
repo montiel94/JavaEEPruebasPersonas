@@ -20,7 +20,7 @@ import com.vanesoft.vtrack.webservice.logica.implementacion.ComandoBase;
  * @version 1.0
  * @since 13/02/2017
  */
-public class ComandoConsultarUsuarioBloqueado extends ComandoBase<Boolean>{
+public class ComandoConsultarUsuarioBloqueado extends ComandoBase<usuario>{
     //atributos region
         usuario usuarioEnBd = null;
         usuario usuarioBusqueda = null;
@@ -37,23 +37,28 @@ public class ComandoConsultarUsuarioBloqueado extends ComandoBase<Boolean>{
         * Nombre:              ejecutar
         * Descripcion:         metodo encargado de llamar el dao en bd
      */
-    public Boolean ejecutar()
-    {
-        usuarioEnBd = daoUsuario.buscarUsuarioXCorreoElectronico(usuarioBusqueda.getUsername());
-        if (usuarioEnBd.getEstadoUsuario().equals(EstadoUsuario.bloqueado))
-        {
-            if (CifrarDescifrar.descifrar(usuarioEnBd.getPassword()).equals(usuarioBusqueda.getPassword()))
-            {
-                return true;
+    public usuario ejecutar() {
+        try {
+            usuarioEnBd = daoUsuario.buscarUsuarioXCorreoElectronico(usuarioBusqueda.getUsername());
+            if (usuarioEnBd != null) {
+                if (usuarioEnBd.getEstadoUsuario().equals(EstadoUsuario.bloqueado)) {
+                    if (CifrarDescifrar.descifrar(usuarioEnBd.getPassword()).equals(usuarioBusqueda.getPassword())) {
+                        return usuarioEnBd;
+                    } else {
+                        throw new LogicaException(PropiedadesLogica.ERROR_USUARIO_INTENTANDO_DESBLOQUEO_LOGIN_FALLIDO);
+                    }
+                } else {
+                    throw new LogicaException(PropiedadesLogica.ERROR_USUARIO_ACTIVO_INTENTANDO_DESBLOQUEO);
+                }
             }
             else
             {
-                throw new LogicaException(PropiedadesLogica.ERROR_USUARIO_INTENTANDO_DESBLOQUEO_LOGIN_FALLIDO);
+                throw  new
+                        LogicaException(PropiedadesLogica.ERROR_USUARIO_NO_ENCONTRADO_EN_VTRACK);
             }
-        }
-        else
+        }catch(LogicaException e)
         {
-            throw new LogicaException(PropiedadesLogica.ERROR_USUARIO_ACTIVO_INTENTANDO_DESBLOQUEO);
+            throw new LogicaException(e.getMessage());
         }
     }
 }

@@ -56,7 +56,7 @@ public class LoginController extends BaseController{
     }
 
     private CodigoToken getToken(usuario user,HttpServletRequest request){
-        ComandoGenerarCodigoAutorizacion comando = FabricaComando.obtenerComandoGenerarCodigoAutorizacion(request);
+        ComandoGenerarCodigoAutorizacion comando = FabricaComando.obtenerComandoGenerarCodigoAutorizacion(request,user);
         CodigoToken codigo = comando.ejecutar();
         return codigo;
     }
