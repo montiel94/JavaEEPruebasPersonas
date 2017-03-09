@@ -28,6 +28,14 @@ public class PropiedadesLogica extends PropiedadesBase {
             = get("error.usuarioactivointentandodesbloqueo");
     public static final String ERROR_USUARIO_NO_ES_NUEVO =
             get("error.usuarionoesnuevo");
+    public static final String ERROR_TOKEN_INVALIDO =
+            get("error.tokeninvalido");
+    public static final String ERROR_GENERANDO_TOKEN
+            = get("error.generandotoken");
+    public static final String ERROR_INESPERADO
+            = get("error.errorinesperado");
+    public static final String ERROR_USUARIO_POSEE_TOKEN
+            = get("error.usuarioposeecodigoauth");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

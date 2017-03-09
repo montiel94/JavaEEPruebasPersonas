@@ -3,3 +3,4 @@
  */
 angular.module('webAppVtrackApp.services', []);
 angular.module('webAppVtrackApp.ModalService', ['angularModalService']);
+angular.module('webAppVtrackApp.Boot', ['ui.bootstrap']);

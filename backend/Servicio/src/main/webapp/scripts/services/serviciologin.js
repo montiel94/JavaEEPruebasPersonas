@@ -16,7 +16,46 @@ function ServicioLogin($q,$rootScope,$http,BASE_URL)
     this.olvidasteContrasena = olvidasteContrasena;
     this.validarUsuarioBloqueado = validarUsuarioBloqueado;
     this.validarAutoregistro = validarAutoregistro;
+    this.autoregistro = autoregistro;
+    /*
+         metodo encargado de terminar el proceso de autoregistro
+         parametros
+         login : correo de cliente
+         password : contrasena del cliente
+     */
+    function autoregistro (login,password){
+        console.log('entrando a la funcion autoregistro');
+        var defered = $q.defer();
+        var promise = defered.promise;
+        var usuario = {"username": login,"password": password};
+        $http
+        ({
+            method: 'put',
+            url: BASE_URL + '/usuario/autoRegistro',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(usuario)
+        }).then(function success(response)
+        {
+            console.log(response);
+            defered.resolve(response.data);
+        },function error(response)
+        {
+            console.log('error: '+response);
+            var error = response.data;
+            defered.reject(error.mensaje);
+        });
 
+        return promise;
+        console.log('saliendo de la funcion autoregistro');
+    }
+
+
+    /*
+        metodo llamado en el metodo cuando el usuario olvido contrasena
+        se envia contrasena
+     */
     function olvidasteContrasena(login) {
         console.log('entrando al metodo olvidasteContrasena');
         var defered = $q.defer();
@@ -109,6 +148,36 @@ function ServicioLogin($q,$rootScope,$http,BASE_URL)
         return promise;
 
     }
+
+    /*
+     funcion que pide acceso al sistema
+     */
+    function getToken(CodigoToken) {
+        var defered = $q.defer();
+        var promise = defered.promise;
+        console.log('entrando a : function login de ServicioLogin');
+        //var CodigoToken = {"valor": auth,"tipo": "TOKEN"};
+        $http
+        ({
+            method: 'put',
+            url: BASE_URL + '/auth/token',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(CodigoToken)
+        }).then(function success(response)
+        {
+            console.log(response);
+            defered.resolve(response.data);
+        },function error(response)
+        {
+            console.log('error: '+response);
+            var error = response.data;
+            defered.reject(error.mensaje);
+        });
+
+        return promise;
+    }
     /*
         funcion que pide acceso al sistema
      */
@@ -128,6 +197,7 @@ function ServicioLogin($q,$rootScope,$http,BASE_URL)
         }).then(function success(response)
         {
             console.log(response);
+            getToken(response.data);
             defered.resolve(response.data);
         },function error(response)
         {

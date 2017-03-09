@@ -76,13 +76,13 @@ angular.module('webAppVtrackApp')
                 return false;
             }
             if (!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(view.password)
-                && (view.password.length>=6))
+                || (view.password.length<6))
             {
                 mostrarError('El campo contraseña no cumple con requisitos')
                 return false;
             }
             if (!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(view.passwordConfirmacion)
-                && (view.passwordConfirmacion.length>=6))
+                || (view.passwordConfirmacion.length<6))
             {
                 mostrarError('El campo confirmación de contraseña no cumple con requisitos')
                 return false;

@@ -6,16 +6,37 @@
                 <h4 class="modal-title">{{title}}</h4>
             </div>
             <div class="modal-body" id = "modalbody">
-                <p> Ingrese su correo electronico : </p>
+                <p>1 - Ingrese su correo electronico : </p>
+
+                            <form name="myForm" class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <input name="correoEmpresa" ng-model="correoEmpresa" required placeholder="Introduzca su correo electronico" class="inputCambioPassword" validadorasincrono>
+                                    </div>
+                                </div>
+                                <ng-messages for="myForm.correoEmpresa.$error" ng-if="myForm.correoEmpresa.$dirty">
+                                    <ng-message when="asincValidator" class="error" style="color:red">*Usuario no existe</ng-message>
+                                </ng-messages>
+                                <br/>
+                            </form>
+                <p>2 - Su nueva contraseña debe cumplir con los siguientes requisitos :</p>
+                <p> Debe contener aunque sea 1 letra</p>
+                <p> Debe contener aunque sea 1 número</p>
+                <p> Debe tener una longitud mayor de 6</p>
+
                 <form class="form-horizontal" role="form">
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="text" required placeholder="Introduzca su correo electronico" class="inputCambioPassword" id = "correo" ng-model="correo">
+                            <input type="password" ng-disabled=myForm.correoEmpresa.$invalid  required placeholder="Introduzca su nueva contraseña" class="inputCambioPassword" id = "password" ng-model="password">
                             <br/>
+                            <br/>
+                            <br/>
+                            <input type="password" ng-disabled=myForm.correoEmpresa.$invalid required placeholder="Confirme su nueva contraseña" class="inputCambioPassword" id = "passwordConfirmacion" ng-model="passwordConfirmacion">
                         </div>
                     </div>
                 </form>
+
                 <div data-ng-show="showError" ng-class="{fade:doFade}" class="alert alert-danger">{{errorMessage}}</div>
 
             </div>

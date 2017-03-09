@@ -60,10 +60,10 @@ angular.module('webAppVtrackApp')
             modal.element.modal();
             modal.close.then(function (result) {
                 console.log('resultado : '+ result.exito);
-              //  if (result.exito == 1)
-                //{
-                 //   mostrarSucces('Tu contrasena fue modificada con exito');
-                //}
+               if (result.exito == 1)
+                {
+                    mostrarSucces('Tu usuario fue autoregistrado con exito');
+                }
             });
         });
         console.log('saliendo de la funcion showModalAutoregistro');
@@ -223,6 +223,7 @@ angular.module('webAppVtrackApp')
                 .then(function(data){
                     console.log('se realizo login exitosamente');
                     var error = data;
+                    $location.path( '/Dashboard' );
                 })
                 .catch(function (error) {
                     console.log('se produjo un error en el login');
@@ -232,6 +233,6 @@ angular.module('webAppVtrackApp')
         }
         console.log('saliendo de : function accionBtnAceptar controlador');
     }
-    
+
 }
 

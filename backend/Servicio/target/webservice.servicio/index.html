@@ -8,7 +8,10 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />-->
+    <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/rdash-ui/dist/css/rdash.min.css">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -80,7 +83,11 @@
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-messages/angular-messages.js"></script>
+<script src="bower_components/ngMessage/ngMessage.js"></script>
 <script src="bower_components\angular-modal-service\dst\angular-modal-service.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -93,6 +100,9 @@
 <script src="scripts/controllers/login/olvidastecontrasenamodalcontroller.js"></script>
 <script src="scripts/controllers/login/autoregistrousuariocontroller.js"></script>
 <script src="scripts/controllers/login/modalLogin/complexcontroller.js"></script>
+<script src="scripts/controllers/dashboard/MasterCtrl.js"></script>
+<script src="scripts/controllers/dashboard/dashboardcontroller.js"></script>
+<script src="scripts/directives/validadorasincrono.js"></script>
 <!-- endbuild -->
 </body>
 </html>

@@ -27,7 +27,7 @@ public class BaseController {
      * @author montda
      * @since 07/01/2016
      */
-    public Object obtenerMensajeDeError( LogicaException e )
+    public Object obtenerMensajeDeError( Exception e )
     {
         return retornarError( this.respuesta );
     }

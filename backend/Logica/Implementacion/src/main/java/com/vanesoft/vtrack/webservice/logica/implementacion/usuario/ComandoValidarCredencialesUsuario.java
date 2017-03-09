@@ -1,6 +1,8 @@
 package com.vanesoft.vtrack.webservice.logica.implementacion.usuario;
+import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoCodigoToken;
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoUsuario;
 import com.vanesoft.vtrack.core.accesodatos.implementacion.FabricaDao;
+import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.EstadoUsuario;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesLogica;
@@ -64,7 +66,18 @@ public class ComandoValidarCredencialesUsuario extends ComandoBase<Boolean> {
         }
         return false;
     }
-
+    public boolean usuarioSinToken(usuario usuarioEnBd)
+    {
+        boolean exito = false;
+        CodigoToken codigoEnBd = null;
+        IDaoCodigoToken daoCodigoToken = FabricaDao.obtenerDaoCodigoToken();
+        codigoEnBd = daoCodigoToken.ConsultaUsuarioPoseeToken(usuarioEnBd);
+        if (codigoEnBd==null)
+            exito = true;
+        else
+            throw new LogicaException(PropiedadesLogica.ERROR_USUARIO_POSEE_TOKEN);
+        return exito;
+    }
     public boolean usuarioActivo (usuario user)
     {
         if (user.getEstadoUsuario().equals(EstadoUsuario.activo))

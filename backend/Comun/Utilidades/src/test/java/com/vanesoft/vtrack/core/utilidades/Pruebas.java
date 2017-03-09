@@ -22,7 +22,7 @@ public class Pruebas extends TestCase {
     {
         //String prueba = CifrarDescifrar.cifrar( "aabbcc3377" );
         //assertEquals(prueba,"daAE/DzPHcTpF5JVWkoeXQ==");
-        String prueba2 = CifrarDescifrar.descifrar( "daAE/DzPHcTpF5JVWkoeXQ==" );
+        String prueba2 = CifrarDescifrar.descifrar( "JiCkOryOUUqXW2STw4R0pA==" );
         assertEquals("aabbcc1122",prueba2);
 
     }

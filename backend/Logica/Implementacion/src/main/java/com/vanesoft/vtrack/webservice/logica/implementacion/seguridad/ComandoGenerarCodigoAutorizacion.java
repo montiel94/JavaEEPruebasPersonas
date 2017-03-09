@@ -77,6 +77,6 @@ public class ComandoGenerarCodigoAutorizacion extends ComandoSeguridad<CodigoTok
      private void registrarCodigoAutorizacion (String codigo)
      {
          codigoAutorizacion.setValor(codigo);
-         codigoAutorizacion.setTipo("TIPOTOKEN");
+         codigoAutorizacion.setTipo("AUTH");
      }
 }

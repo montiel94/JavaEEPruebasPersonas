@@ -19,6 +19,9 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
+        'ngMessages',
+        'ngMessage',
+        'ui.bootstrap',
         'webAppVtrackApp.services',
         'webAppVtrackApp.ModalService'
     ]).constant("BASE_URL", "http://localhost:8080/webservice.servicio/api")
@@ -29,7 +32,11 @@ angular
                 controller: 'LoginctrlCtrl',
                 controllerAs: 'main'
             })
+            .when('/Dashboard', {
+                templateUrl: 'views/dashboard/dashboard.html',
+                controller: 'MasterCtrl'
+            })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/Dashboard'
             });
     });

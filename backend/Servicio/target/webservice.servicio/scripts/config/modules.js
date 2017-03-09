@@ -10,5 +10,10 @@ angular
         'ngRoute',
         'ngSanitize',
         'ngTouch',
+        'ngMessages',
+        'ngMessage',
         'webAppVtrackApp.services',
+        'ui.router',
+        'ui.bootstrap',
+
     ]);

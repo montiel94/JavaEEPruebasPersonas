@@ -28,6 +28,14 @@ public class PropiedadesServicios extends PropiedadesBase {
             = get("respuesta.usuariobloqueadocredencialerrada");
     public static final String  RESPUESTA_USUARIO_NO_POSEE_ESTADO_NUEVO
             =get("respuesta.usuarionoesnuevo");
+    public static final String RESPUESTA_TOKEN_INVALIDO
+            =get("respuesta.tokeninvalido");
+    public static final String RESPUESTA_ERROR_GENERANDO_TOKEN
+            = get("respuesta.errorgenerandotoken");
+    public static final String RESPUESTA_ERROR_INESPERADO
+            = get("respuesta.errorinesperado");
+    public static final String RESPUESTA_ERROR_USUARIO_POSEE_TOKEN
+            =get("respuesta.errorusuarioposeetoken");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

@@ -5,7 +5,7 @@ angular.module('webAppVtrackApp')
     .controller('autoregistrousuariocontroller', autoregistrousuariocontroller);
 
 
-function autoregistrousuariocontroller ($scope, $element, title, close,$timeout,ServicioLogin) {
+function autoregistrousuariocontroller ($scope, $element, title, close,$timeout,ServicioLogin,$compile) {
 
     var view = $scope;
     $scope.title = title;
@@ -21,41 +21,65 @@ function autoregistrousuariocontroller ($scope, $element, title, close,$timeout,
 
     };
 
+    function validarContrasena() {
+        console.log('entrando al metodo validarContrasena');
+        if (!view.password)
+        {
+            mostrarError('El campo contraseña es obligatorio')
+            return false;
+        }
+        if (!view.passwordConfirmacion)
+        {
+            mostrarError('El campo confirmación de contraseña es obligatorio')
+            return false;
+        }
+        if (!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(view.password)
+            || (view.password.length<6))
+        {
+            mostrarError('El campo contraseña no cumple con requisitos')
+            return false;
+        }
+        if (!/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/.test(view.passwordConfirmacion)
+            || (view.passwordConfirmacion.length<6))
+        {
+            mostrarError('El campo confirmación de contraseña no cumple con requisitos')
+            return false;
+        }
+        if (view.password != view.passwordConfirmacion)
+        {
+            mostrarError('La constraseña y su confirmación son distintos');
+            return false;
+        }
+        return true;
+        console.log('entrando al metodo validarContrasena');
+    }
     $scope.accionBotonOk = function (){
         console.log('entrando a la funcion accionBotonOk');
-        if (validarCorreo())
+
+        if (validarContrasena())
         {
-            ServicioLogin.validarAutoregistro(view.correo)
+            ServicioLogin.autoregistro(view.correoEmpresa,view.password)
                 .then(function(data){
                     console.log('se realizo login exitosamente');
-                    //var error = data;
-                    //$element.modal('hide');
-                    //close({
-                      //  exito : '1'
-                    //}, 500);
+                    var error = data;
+                    $element.modal('hide');
+                    close({
+                        exito : '1'
+                    }, 500);
                 })
                 .catch(function (error) {
                     console.log('se produjo un error en el login');
                     mostrarError(error);
+
                 });
         }
+
         console.log('saliendo de la funcion accionBotonOk');
     }
+    
 
-    function validarCorreo() {
-        console.log('entrando al metodo validar');
-        if (!view.correo) {
-            mostrarError('El campo correo electronico es obligatorio');
-            return false;
-        }
-        if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(view.correo))
-        {
-            mostrarError('Correo electronico no cumple con formato');
-            return false;
-        }
-        return true;
-        console.log('saliendo del validar validar');
-    }
+
+
 
     function mostrarError(error) {
         console.log('entrando al metodo mostrarError');

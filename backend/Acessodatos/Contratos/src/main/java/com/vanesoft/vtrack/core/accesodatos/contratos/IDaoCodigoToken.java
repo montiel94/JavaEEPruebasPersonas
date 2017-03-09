@@ -20,4 +20,30 @@ public interface IDaoCodigoToken {
      * @since 04/02/2017
      */
     public boolean guardarCodigoToken(CodigoToken codigo, usuario user);
+    /**
+     * Descripcion: metodo que modifica el valor de un token dado
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/03/2017
+     */
+    public boolean modificarValorToken (String nuevoValor, CodigoToken token);
+    /**
+     * Descripcion: metodo que modifica el tipo de un token dado
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/03/2017
+     */
+    public boolean modificarTipoToken (CodigoToken token);
+    /**
+     * Descripcion: metodo que consulta un token dado su valor
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/03/2017
+     */
+    public CodigoToken ConsultarCodigoAuthXValor (CodigoToken codigoAuth);
+
+    public CodigoToken ConsultaUsuarioPoseeToken(usuario usuarioEnBd);
 }

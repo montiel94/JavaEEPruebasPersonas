@@ -34,6 +34,38 @@ import javax.ws.rs.core.MediaType;
 @Path("/usuario")
 public class UsuarioController extends BaseController {
 
+    /*
+        nombre : autoRegistro
+        Descripcion : metodo que termina el proceso de autoregistro del usuario
+        creacion : 02/03/2017
+        Parametros : usuario de Vtrack
+        @author montda
+        @version 1.0
+     */
+    @Path("/autoRegistro")
+    @PUT
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Object autoRegistro(usuario user)
+    {
+        Boolean exito = false;
+        try
+        {
+            exito = autoRegistrar(user);
+        }
+        catch (LogicaException e)
+        {
+            return obtenerMensajeDeError( e );
+        }
+        return exito;
+    }
+    /*
+        Descripcion : metodo que valida el autoregistro de un usuario
+        creacion : 02/03/2017
+        Parametros : usuario de Vtrack
+        @author montda
+        @version 1.0
+     */
     @Path("/autoRegistro")
     @POST
     @Produces("application/json")
@@ -51,7 +83,14 @@ public class UsuarioController extends BaseController {
         }
         return exito;
     }
-
+    /*
+        Descripcion : metodo que enviar por correo clave provisional
+        cuando el usuario olvida contrasena
+        creacion : 02/03/2017
+        Parametros : usuario de Vtrack
+        @author montda
+        @version 1.0
+     */
     @Path("/olvidastecontrasena")
     @POST
     @Produces("application/json")
@@ -92,7 +131,14 @@ public class UsuarioController extends BaseController {
         }
         return exito;
     }
-
+    /*
+        Descripcion : metodo que valida si el usuario exite en vtrack y
+        no se encuentre bloqueado
+        creacion : 22/02/2017
+        Parametros : usuario de Vtrack
+        @author montda
+        @version 1.0
+     */
     private boolean validarUsuarioOlvidoContrasena(usuario user)
     {
         boolean exito = false;
@@ -179,6 +225,35 @@ public class UsuarioController extends BaseController {
         return exito;
     }
 
+    public Boolean autoRegistrar(usuario user)
+    {
+        Boolean exito = false;
+        try
+        {
+            user.setEstadoUsuario(EstadoUsuario.activo);
+            ComandoCambiarEstadoUsuario comandoCambiarEstadoUsuario =
+                    FabricaComando.obtenerComandoCambiarEstadoUsuario(user);
+            exito  = comandoCambiarEstadoUsuario.ejecutar();
+            if (exito)
+            {
+                ComandoModificarPasswordUsuario comandoModificarPasswordUsuario =
+                        FabricaComando.obtenerComandoModificarPasswordUsuario(user,user.getPassword());
+                exito = comandoModificarPasswordUsuario.ejecutar();
+            }
+        }catch (LogicaException e)
+        {
+
+        }
+        return exito;
+    }
+
+    /*
+        Descripcion : metodo con logica de la validacion del autoregistro
+        creacion : 01/03/2017
+        Parametros : usuario de Vtrack
+        @author montda
+        @version 1.0
+     */
     public Boolean validarAutoRegistro(usuario user)
     {
         Boolean exito = false;
@@ -217,7 +292,13 @@ public class UsuarioController extends BaseController {
         }
         return usuarioEnbd;
     }
-
+    /*
+        Descripcion : metodo busca mensaje ha ser mostrado en el cliente
+        creacion : 02/03/2017
+        Parametros : usuario de Vtrack
+        @author montda
+        @version 1.0
+     */
     public Object obtenerMensajeDeError(LogicaException e ) {
         if (e.getMessage().contains(PropiedadesLogica.ERROR_USUARIO_ACTIVO_INTENTANDO_DESBLOQUEO.substring(0,
                 PropiedadesLogica.ERROR_USUARIO_ACTIVO_INTENTANDO_DESBLOQUEO.length() - 3)))

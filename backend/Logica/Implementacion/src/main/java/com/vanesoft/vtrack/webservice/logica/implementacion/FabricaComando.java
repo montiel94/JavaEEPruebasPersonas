@@ -1,8 +1,10 @@
 package com.vanesoft.vtrack.webservice.logica.implementacion;
 
+import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.correo.ComandoEnviarCorreo;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
+import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -156,5 +158,18 @@ public final class FabricaComando {
      */
     public static ComandoEnviarCorreoParametrizado obtenerComandoEnviarCorreoParametrizado(usuario usuarioEnBd,String tipoPlantilla){
         return new ComandoEnviarCorreoParametrizado (tipoPlantilla,usuarioEnBd);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoConsultarUsuario
+     * Descripcion:             genera el comando ComandoConsultarUsuario
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 13/02/17
+     */
+    public static ComandoGenerarToken obtenerComandoGenerarToken(CodigoToken codigoAuthorizacion){
+        return new ComandoGenerarToken(codigoAuthorizacion);
     }
 }

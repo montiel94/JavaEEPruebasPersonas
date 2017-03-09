@@ -9,10 +9,12 @@ import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesLogica;
 import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesServicios;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
+import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.FabricaComando;
 import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.ComandoValidarCredencialesUsuario;
 import com.vanesoft.vtrack.core.excepciones.LogicaException;
 import controllers.BaseController;
+import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 
 
 /**
@@ -44,7 +46,7 @@ public class LoginController extends BaseController{
         CodigoToken token = null;
         try {
             if (validaCredenciales(user)) {
-                token = getToken(user, request);
+                token = getCodigoAuth(user, request);
             }
         }
         catch (LogicaException e)
@@ -55,10 +57,42 @@ public class LoginController extends BaseController{
 
     }
 
-    private CodigoToken getToken(usuario user,HttpServletRequest request){
+    /*
+       * Nombre:              doPost
+       * Descripcion:         metodo encargado de validar credenciales de usuario
+       *                      y la generacion de token
+    */
+    @Path("/token")
+    @PUT
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Object doPut(@Context HttpServletRequest request, CodigoToken codigoAuthorization){
+        // variable que contiene token a generar;
+        CodigoToken token = null;
+        try
+        {
+            token = getToken(codigoAuthorization);
+        }
+        catch (LogicaException e)
+        {
+            return obtenerMensajeDeError( e );
+        }catch (Exception e)
+        {
+            return obtenerMensajeDeError( e );
+        }
+        return token;
+
+    }
+    private CodigoToken getCodigoAuth(usuario user,HttpServletRequest request){
         ComandoGenerarCodigoAutorizacion comando = FabricaComando.obtenerComandoGenerarCodigoAutorizacion(request,user);
         CodigoToken codigo = comando.ejecutar();
         return codigo;
+    }
+
+    private CodigoToken getToken(CodigoToken token){
+        ComandoGenerarToken comandoGenerarCodigoAutorizacion =
+                FabricaComando.obtenerComandoGenerarToken(token);
+        return comandoGenerarCodigoAutorizacion.ejecutar();
     }
 
     private Boolean validaCredenciales (usuario user){
@@ -68,7 +102,7 @@ public class LoginController extends BaseController{
 
 
 
-    public Object obtenerMensajeDeError(LogicaException e ) {
+    public Object obtenerMensajeDeError(Exception e ) {
         if (e.getMessage().contains(PropiedadesLogica.ERROR_CREDENCIALES_USUARIO_ERRADAS.substring(0,
                 PropiedadesLogica.ERROR_CREDENCIALES_USUARIO_ERRADAS.length() - 3)))
         {
@@ -91,7 +125,29 @@ public class LoginController extends BaseController{
         {
             getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_USUARIO_BLOQUEADO_INTENTANDO_LOGIN);
         }
-
+        if (e.getMessage().contains(PropiedadesLogica.ERROR_TOKEN_INVALIDO.substring(0,
+                PropiedadesLogica.ERROR_TOKEN_INVALIDO.length() - 3)))
+        {
+            getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_TOKEN_INVALIDO);
+        }
+        if (e.getMessage().contains(PropiedadesLogica.ERROR_GENERANDO_TOKEN.substring(0,
+                PropiedadesLogica.ERROR_GENERANDO_TOKEN.length() - 3)))
+        {
+            getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_ERROR_GENERANDO_TOKEN);
+        }
+        if (e.getMessage().contains(PropiedadesLogica.ERROR_INESPERADO.substring(0,
+                PropiedadesLogica.ERROR_INESPERADO.length() - 3)))
+        {
+            getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_ERROR_GENERANDO_TOKEN);
+        }
+        if (e.getMessage().contains(PropiedadesLogica.ERROR_INESPERADO.substring(0,
+                PropiedadesLogica.ERROR_INESPERADO.length() - 3))) {
+            getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_ERROR_INESPERADO);
+        }
+        if (e.getMessage().contains(PropiedadesLogica.ERROR_USUARIO_POSEE_TOKEN.substring(0,
+                PropiedadesLogica.ERROR_USUARIO_POSEE_TOKEN.length() - 3))) {
+            getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_ERROR_USUARIO_POSEE_TOKEN);
+        }
         return super.obtenerMensajeDeError(e);
     }
 }
