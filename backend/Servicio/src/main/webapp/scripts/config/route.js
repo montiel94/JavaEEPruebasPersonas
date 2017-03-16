@@ -23,20 +23,61 @@ angular
         'ngMessage',
         'ui.bootstrap',
         'webAppVtrackApp.services',
-        'webAppVtrackApp.ModalService'
+        'webAppVtrackApp.ModalService',
+        'ui.router',
     ]).constant("BASE_URL", "http://localhost:8080/webservice.servicio/api")
-    .config(function ($routeProvider) {
-        $routeProvider
-            .when('/', {
+    .config(function ($stateProvider, $urlRouterProvider) {
+
+        $stateProvider
+        // HOME STATES AND NESTED VIEWS ========================================
+            .state('dashboardpedidos', {
+                url: '/dashboard',
+                //templateUrl: 'views/dashboard/dashboard.html',
+                //controller: 'MasterCtrl',
+                views: {
+                    '':{
+                        templateUrl: 'views/dashboard/dashboard.html',
+                        controller: 'MasterCtrl'
+                    },
+                    'pedidosGeneral@dashboardpedidos':{
+                        templateUrl: 'views/dashboard/pedidosTemplate.html',
+                        controller: 'PedidosCtrl'
+                    }
+                }
+            })
+            .state('dashboardgenerarpedido', {
+                url: '/dashboardgenerarpedido',
+                //templateUrl: 'views/dashboard/dashboard.html',
+                //controller: 'MasterCtrl',
+                views: {
+                    '':{
+                        templateUrl: 'views/dashboard/dashboard.html',
+                        controller: 'MasterCtrl'
+                    },
+                    'SolicitarPedido@dashboardgenerarpedido':{
+                        templateUrl: 'views/dashboard/solicitarPedidoTemplate.html'
+                    }
+                }
+            })
+            .state('dashboarddetalladopedido', {
+                url: '/dashboarddetalladopedido',
+                //templateUrl: 'views/dashboard/dashboard.html',
+                //controller: 'MasterCtrl',
+                views: {
+                    '':{
+                        templateUrl: 'views/dashboard/dashboard.html',
+                        controller: 'MasterCtrl'
+                    },
+                    'Detalladopedido@dashboarddetalladopedido':{
+                        templateUrl: 'views/dashboard/detalladoPedidoTemplate.html'
+                    }
+                }
+            })
+            .state('login', {
+                url: '/login',
                 templateUrl: 'views/login/login.html',
                 controller: 'LoginctrlCtrl',
-                controllerAs: 'main'
-            })
-            .when('/Dashboard', {
-                templateUrl: 'views/dashboard/dashboard.html',
-                controller: 'MasterCtrl'
-            })
-            .otherwise({
-                redirectTo: '/Dashboard'
             });
+
+        $urlRouterProvider.otherwise('/login');
     });

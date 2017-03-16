@@ -8,7 +8,7 @@
 angular.module('webAppVtrackApp.services')
     .service('ServicioLogin', ['$q','$rootScope','$http','BASE_URL',ServicioLogin]);
 
-function ServicioLogin($q,$rootScope,$http,BASE_URL)
+function ServicioLogin($q,$rootScope,$http,BASE_URL,$scope)
 {
     this.login = login;
     this.validarUsuarioBloqueado = validarUsuarioBloqueado;
@@ -17,6 +17,7 @@ function ServicioLogin($q,$rootScope,$http,BASE_URL)
     this.validarUsuarioBloqueado = validarUsuarioBloqueado;
     this.validarAutoregistro = validarAutoregistro;
     this.autoregistro = autoregistro;
+    this.getToken = getToken;
     /*
          metodo encargado de terminar el proceso de autoregistro
          parametros
@@ -197,7 +198,6 @@ function ServicioLogin($q,$rootScope,$http,BASE_URL)
         }).then(function success(response)
         {
             console.log(response);
-            getToken(response.data);
             defered.resolve(response.data);
         },function error(response)
         {

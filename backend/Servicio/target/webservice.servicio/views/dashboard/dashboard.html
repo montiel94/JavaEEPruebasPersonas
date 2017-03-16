@@ -1,5 +1,6 @@
-<body ng-controller="MasterCtrl">
-<div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+
+
+<div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak ng-controller="MasterCtrl as mc" data-ng-init="init()">
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar">
@@ -11,10 +12,15 @@
             </li>
             <li class="sidebar-title"><span>MENU</span></li>
             <li class="sidebar-list">
-                <a href="#">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+                <a href ng-click="menuDashboard()" dashboarddirective>Dashboard <span class="menu-icon fa fa-bar-chart"></span></a>
             </li>
+
             <li class="sidebar-list">
-                <a href="#/tables">Tables <span class="menu-icon fa fa-table"></span></a>
+                <a href>Perfil<span class="menu-icon fa fa-user"></span></a>
+            </li>
+
+            <li class="sidebar-list">
+                <a href ng-click="cambiarTemplate()">Generar pedido <span class="menu-icon fa fa-table"></span></a>
             </li>
         </ul>
         <div class="sidebar-footer">
@@ -37,27 +43,25 @@
     </div>
     <!-- End Sidebar -->
     <div id="content-wrapper">
-        <div class="page-content">
-
             <!-- Header Bar -->
             <div class="row header">
                 <div class="col-xs-12">
                     <div class="user pull-right">
                         <div class="item dropdown" uib-dropdown>
                             <a href class="dropdown-toggle" uib-dropdown-toggle>
-                                <img src="images/avatar.jpg">
+                                <img src="images/config3.jpg">
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li class="dropdown-header">
-                                    Joe Bloggs
+                                    Configuración
                                 </li>
                                 <li class="divider"></li>
                                 <li class="link">
                                     <a href="#">
-                                        Profile
+                                        Perfil
                                     </a>
                                 </li>
-                                <li class="link">
+                                <!--<li class="link">
                                     <a href="#">
                                         Menu Item
                                     </a>
@@ -66,16 +70,16 @@
                                     <a href="#">
                                         Menu Item
                                     </a>
-                                </li>
+                                </li>-->
                                 <li class="divider"></li>
                                 <li class="link">
-                                    <a href="#">
+                                    <a href ng-click="logoutVtrack()">
                                         Logout
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="item dropdown" uib-dropdown>
+                        <!--<div class="item dropdown" uib-dropdown>
                             <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
                                 <i class="fa fa-bell-o"></i>
                             </a>
@@ -88,7 +92,7 @@
                                     <a href="#">Server Down!</a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="meta">
                         <div class="page">
@@ -103,9 +107,11 @@
             <!-- End Header Bar -->
 
             <!-- Main Content -->
-            <div ui-view></div>
+            <div ui-view="pedidosGeneral"></div>
+            <div ui-view="SolicitarPedido"></div>
+            <div ui-view="Detalladopedido"></div>
+            <!--<dashboarddirective></dashboarddirective>-->
 
         </div><!-- End Page Content -->
     </div><!-- End Content Wrapper -->
 </div><!-- End Page Wrapper -->
-</body>

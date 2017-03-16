@@ -44,6 +44,21 @@ public interface IDaoCodigoToken {
      * @since 06/03/2017
      */
     public CodigoToken ConsultarCodigoAuthXValor (CodigoToken codigoAuth);
-
+    /**
+     * Descripcion: metodo que consulta si un usuario posee un token registrado en ele sistema
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/03/2017
+     */
     public CodigoToken ConsultaUsuarioPoseeToken(usuario usuarioEnBd);
+
+    /**
+     * Descripcion: metodo que elimina un token en el sistema
+     *
+     * @version 1.0
+     * @author montda
+     * @since 06/03/2017
+     */
+    public boolean eliminarToken(String codigoToken);
 }

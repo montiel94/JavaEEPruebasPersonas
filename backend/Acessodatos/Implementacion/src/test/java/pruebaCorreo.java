@@ -2,9 +2,15 @@
  * Created by Daniel jose on 08/02/2017.
  */
 import com.vanesoft.vtrack.core.accesodatos.implementacion.DaoCorreo;
+import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoPedido;
+import com.vanesoft.vtrack.core.accesodatos.implementacion.FabricaDao;
 import com.vanesoft.vtrack.core.entidades.Correo;
+import com.vanesoft.vtrack.core.entidades.Pedido;
 import com.vanesoft.vtrack.core.utilidades.propiedades.CifrarDescifrar;
 import junit.framework.TestCase;
+
+import java.util.ArrayList;
+
 public class pruebaCorreo extends TestCase{
     @Override
     protected void setUp() throws Exception
@@ -29,5 +35,12 @@ public class pruebaCorreo extends TestCase{
         String contrasena = "hola";
         DaoCorreo daoCorreo = new DaoCorreo();
         assertEquals(contrasena,daoCorreo.generarContrasenaProvisional(8));
+    }
+
+    public void testConsultarPedidosXUsuario(){
+        IDaoPedido daoPedido = FabricaDao.obtenerDaoPedido();
+        ArrayList<Pedido> pedidosEnBd =
+                daoPedido.consultarPedidosXEmpresa("dmscanniello@gmail.com");
+        assertEquals("hola","chao");
     }
 }

@@ -8,6 +8,7 @@ import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesLogica;
 import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesServicios;
+import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoEliminarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.FabricaComando;
@@ -32,6 +33,33 @@ public class LoginController extends BaseController{
     //region atributos
 
     //end redgion atributos
+
+    /*
+        * Nombre:              doPost
+        * Descripcion:         metodo encargado de validar credenciales de usuario
+        *                      y la generacion de token
+     */
+    @Path("/token")
+    @DELETE
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Object doDelete(@Context HttpServletRequest request , String codigoToken){
+        // variable que contiene token a generar;
+        CodigoToken token = null;
+        Boolean exito = false;
+        try {
+                exito = eliminarToken(codigoToken);
+            }
+
+        catch (Exception e)
+        {
+            return obtenerMensajeDeError( e );
+        }
+        return true;
+
+    }
+
+
     /*
         * Nombre:              doPost
         * Descripcion:         metodo encargado de validar credenciales de usuario
@@ -100,7 +128,22 @@ public class LoginController extends BaseController{
         return comando.ejecutar();
     }
 
-
+    /*
+        Descripcion : metodo que elimina un token en el sistems
+        parametros : codigoToken a eliminar
+        return : true en caso de exito
+        @author : montda
+        @since : 03/02/2017
+     */
+    public Boolean eliminarToken(String codigoToken)
+    {
+        codigoToken = codigoToken.replace("\"","");
+        ComandoEliminarToken comandoEliminarToken =
+                FabricaComando.obtenerComandoEliminarToken(codigoToken);
+        Boolean exito = false;
+        exito = comandoEliminarToken.ejecutar();
+        return exito;
+    }
 
     public Object obtenerMensajeDeError(Exception e ) {
         if (e.getMessage().contains(PropiedadesLogica.ERROR_CREDENCIALES_USUARIO_ERRADAS.substring(0,

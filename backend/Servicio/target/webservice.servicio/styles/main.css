@@ -117,7 +117,17 @@ body {
 
   }
 
-
+  .inputtablapedidos{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 0px 10px 0px 40px;
+    width: 250px;
+    float: left;
+    background-image: url('searchicon3.png'); /* Add a search icon to input */
+    background-position: 10px 6px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+  }
 
   .divpasswordautoregistro{
     display: none;
@@ -143,5 +153,15 @@ body {
 
   .app-modal-window .modal-dialog {
     width: 10px;
+  }
+
+  .filaTablaPedidos{
+    cursor: pointer;
+  }
+
+  .filaTablaPedidos:hover{
+    background-color: #30426a;
+    color: white;
+    border-left: 7px solid #e99d1a;
   }
 }

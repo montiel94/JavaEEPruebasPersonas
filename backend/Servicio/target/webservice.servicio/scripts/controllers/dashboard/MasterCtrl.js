@@ -2,13 +2,26 @@
  * Created by Daniel jose on 07/03/2017.
  */
 angular.module('webAppVtrackApp')
-    .controller('MasterCtrl', ['$scope', '$cookieStore', '$log',MasterCtrl]);
+    .controller('MasterCtrl', ['$scope', '$cookieStore', '$log','$rootScope','$state','ServicioDashboard',MasterCtrl]);
 
-function MasterCtrl($scope, $cookieStore,$log) {
+function MasterCtrl($scope, $cookieStore,$log,$rootScope,$state,ServicioDashboard) {
     /**
      * Sidebar Toggle & Cookie Control
      */
     var mobileView = 992;
+
+    $scope.init = function()
+    {
+        console.log('entrando al metodo onloadpage');
+        if (angular.isUndefined($rootScope.tokenAuth)) {
+            $state.go('login');
+        }
+        else
+        {
+            $rootScope.page = 'dashboard';
+        }
+        console.log('saliendo del mtodo onloadpage');
+    };
 
     $scope.getWidth = function() {
         return window.innerWidth;
@@ -57,4 +70,43 @@ function MasterCtrl($scope, $cookieStore,$log) {
     };
 
     $scope.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+
+    $scope.onloadPage = function () {
+        console.log('entrando al metodo onloadpage');
+        if (angular.isUndefined($rootScope.tokenAuth)) {
+            $state.go('login');
+        }
+        console.log('saliendo del mtodo onloadpage');
+    }
+
+    $scope.logoutVtrack = function () {
+        console.log('entrando al metodo logout logoutVtrack');
+
+        ServicioDashboard.logout()
+            .then(function(data){
+                console.log('se realizo logout exitosamente');
+                var error = data;
+                $rootScope.tokenAuth = undefined;
+                $rootScope.correouser = undefined;
+                $state.go( 'login' );
+            })
+            .catch(function (error) {
+                console.log('se produjo un error en el login');
+                mostrarError(error);
+            });
+        console.log('saliendo del metodo logout logoutVtrack');
+    }
+
+    $scope.menuDashboard = function () {
+        console.log('entrando al metodo menuDashboard');
+        $state.go( 'dashboardpedidos' );
+        console.log('entrando al metodo menuDashboard');
+    }
+
+    $scope.cambiarTemplate = function () {
+        console.log('entrando al metodo menuDashboard');
+        $state.go( 'dashboardgenerarpedido' );
+        console.log('entrando al metodo menuDashboard');
+    }
+
 }

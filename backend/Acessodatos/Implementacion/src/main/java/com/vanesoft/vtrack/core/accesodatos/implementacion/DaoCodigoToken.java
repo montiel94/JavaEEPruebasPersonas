@@ -142,4 +142,26 @@ public class DaoCodigoToken extends Dao implements IDaoCodigoToken {
         }
         return codigoEnBd;
     }
+
+    /*
+         Nombre : eliminarToken
+        Descripcion : elimna un token en el sistema
+        @author : montda
+        @since : 07/02/2017
+        return : true en caso de exito
+    */
+    public boolean eliminarToken(String codigoToken) {
+        try {
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query = "DELETE FROM VTRACK_TOKEN " +
+                    "WHERE VALOR = '" + codigoToken + "' ";
+            stmt.execute(query);
+            connection.close();
+
+        } catch (Exception e) {
+
+        }
+        return true;
+    }
 }

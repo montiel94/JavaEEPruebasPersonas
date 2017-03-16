@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <rd-widget>
+            <rd-widget-body >
+                <div id = "rd-widget-body-en-cola">
+                <div class="widget-icon green pull-left">
+                    <i class="fa fa-truck"></i>
+                </div>
+                </div>
+                <div class="comment">En espera</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <rd-widget>
+            <rd-widget-body>
+                <div id = "rd-widget-body-en-chuto">
+                <div class="widget-icon red pull-left">
+                    <i class="fa fa-truck"></i>
+                </div>
+                </div>
+                <div class="comment">Autorizado</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <rd-widget>
+            <rd-widget-body>
+                <div id = "rd-widget-body-terminando">
+                <div class="widget-icon orange pull-left">
+                    <i class="fa fa-truck"></i>
+                </div>
+                </div>
+                <div class="comment">Llenando</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+    <div class="col-lg-3 col-md-6 col-xs-12">
+        <rd-widget>
+            <rd-widget-body>
+                <div id = "rd-widget-body-saliendo">
+                <div class="widget-icon blue pull-left">
+                    <i class="fa fa-truck"></i>
+                </div>
+                </div>
+                <div class="comment">Cargado</div>
+            </rd-widget-body>
+        </rd-widget>
+    </div>
+</div>
+<div class="col-lg-12" ng-controller="PedidosCtrl" data-ng-init="init()" id = "tabla">
+    <rd-widget>
+        <rd-widget-header icon="fa fa-truck" title="Pedidos">
+            <input type="text" id="myInput" onkeyup="inputBuscador()" class="form-control input-sm"  placeholder="Codigo de pedido" >
+        </rd-widget-header>
+        <rd-widget-body classes="medium no-padding">
+            <div class="table-responsive">
+                <table class="table" id="myTable">
+                    <tr class="header">
+                        <th style="width:30%;">Codigo</th>
+                        <th style="width:40%;">Estado</th>
+                        <th style="width:30%;">Fecha de creación</th>
+                    </tr>
+                    <tbody id = "tbodyTablaPedidos">
+                    </tbody>
+                </table>
+            </div>
+        </rd-widget-body>
+    </rd-widget>
+</div>
+<script>
+    function inputBuscador() {
+        console.log('entrando a la funcion inputBuscador');
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+        console.log('saliendo de la funcion inputBuscador');
+    }
+</script>

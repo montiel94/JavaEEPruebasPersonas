@@ -79,5 +79,15 @@ public final class FabricaDao {
      */
     public static IDaoCorreo obtenerDaoCorreo(){ return new DaoCorreo();}
 
+    /**
+     * Nombre:                  obtenerDaoPedido
+     * Descripcion:             genera el DAOPedido
+     *
+     * @return el dao
+     * @version 1.0
+     * @author montda
+     * @since 14/03/17
+     */
+    public static IDaoPedido obtenerDaoPedido(){ return new DaoPedido();}
 
 }

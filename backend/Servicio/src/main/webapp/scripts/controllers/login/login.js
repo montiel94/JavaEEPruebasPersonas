@@ -8,9 +8,9 @@
  * Controller of the webAppVtrackApp
  */
 angular.module('webAppVtrackApp')
-  .controller('LoginctrlCtrl', loginCtrl);
+  .controller('LoginctrlCtrl',['$scope', '$location', '$rootScope','$timeout','ServicioLogin','ModalService','$state',loginCtrl]);
 
-  function loginCtrl($scope, $location, $rootScope,$timeout,ServicioLogin,ModalService)
+  function loginCtrl($scope, $location, $rootScope,$timeout,ServicioLogin,ModalService,$state)
 {
     var view = $scope;
     view.accionBotonOlvidasteContrasena = accionBotonOlvidasteContrasena;
@@ -219,19 +219,39 @@ angular.module('webAppVtrackApp')
         console.log('entrando a : function accionBtnAceptar controlador');
         if (validaCampos())
         {
+            var authsucess = "";
         	ServicioLogin.login(view.user,view.password)
                 .then(function(data){
                     console.log('se realizo login exitosamente');
                     var error = data;
-                    $location.path( '/Dashboard' );
+                    var authsucess =  data.valor;
+                    authRecibidoSolicitarToken(data);
                 })
                 .catch(function (error) {
                     console.log('se produjo un error en el login');
                     mostrarError(error);
 
                 });
+
         }
         console.log('saliendo de : function accionBtnAceptar controlador');
+    }
+
+    function authRecibidoSolicitarToken(auth) {
+        console.log('entrando al metodo authRecibidoSolicitarToken');
+        ServicioLogin.getToken(auth)
+            .then(function(data){
+                console.log('se realizo login exitosamente');
+                var error = data;
+                $rootScope.tokenAuth = data.valor;
+                $rootScope.correouser = view.user;
+                $state.go( 'dashboardpedidos' );
+            })
+            .catch(function (error) {
+                console.log('se produjo un error en el login');
+                mostrarError(error);
+            });
+        console.log('saliendo del metodo authRecibidoSolicitarToken');
     }
 
 }

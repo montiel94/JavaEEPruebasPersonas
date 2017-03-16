@@ -3,6 +3,8 @@ package com.vanesoft.vtrack.webservice.logica.implementacion;
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.correo.ComandoEnviarCorreo;
+import com.vanesoft.vtrack.webservice.logica.implementacion.pedido.ComandoBuscarPedidosXEmpresa;
+import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoEliminarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.*;
@@ -171,5 +173,31 @@ public final class FabricaComando {
      */
     public static ComandoGenerarToken obtenerComandoGenerarToken(CodigoToken codigoAuthorizacion){
         return new ComandoGenerarToken(codigoAuthorizacion);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoConsultarUsuario
+     * Descripcion:             genera el comando ComandoConsultarUsuario
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 13/02/17
+     */
+    public static ComandoEliminarToken obtenerComandoEliminarToken(String codigoToken){
+        return new ComandoEliminarToken(codigoToken);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoBuscarPedidosXEmpresa
+     * Descripcion:             genera el comando ComandoBuscarPedidosXEmpresa
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 15/03/17
+     */
+    public static ComandoBuscarPedidosXEmpresa  obtenerComandoBuscarPedidosXEmpresa (String correoEmpresa){
+        return new ComandoBuscarPedidosXEmpresa(correoEmpresa);
     }
 }
