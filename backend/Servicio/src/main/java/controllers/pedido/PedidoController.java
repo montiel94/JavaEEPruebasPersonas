@@ -6,7 +6,7 @@ import com.vanesoft.vtrack.webservice.logica.implementacion.FabricaComando;
 import com.vanesoft.vtrack.webservice.logica.implementacion.pedido.ComandoBuscarPedidosXEmpresa;
 import controllers.BaseController;
 import com.vanesoft.vtrack.core.entidades.Pedido;
-
+import com.vanesoft.vtrack.webservice.logica.implementacion.interceptores.TokenSecurity;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
@@ -28,6 +28,7 @@ public class PedidoController extends BaseController {
     Boolean modoDebud = false;
     @Path("/all/{correoEmpresa}")
     @GET
+    @TokenSecurity
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
     public Object doGet(@PathParam("correoEmpresa") String correoEmpresa)
