@@ -11,4 +11,6 @@ public interface IDaoPedido {
 
     public ArrayList<Pedido> consultarPedidosXEmpresa(String nombreEmpresa);
 
+    public Pedido consultarPedidosXCodigo(String codigoPedido);
+
 }

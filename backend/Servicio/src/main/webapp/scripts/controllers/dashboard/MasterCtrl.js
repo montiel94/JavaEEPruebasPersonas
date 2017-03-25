@@ -109,4 +109,10 @@ function MasterCtrl($scope, $cookieStore,$log,$rootScope,$state,ServicioDashboar
         console.log('entrando al metodo menuDashboard');
     }
 
+    $scope.goToPerfil = function () {
+        console.log('entrando al metodo goToPerfil');
+        $state.go( 'perfil' );
+        console.log('entrando al metodo goToPerfil');
+    }
+
 }

@@ -1,10 +1,12 @@
 /**
  * Created by Daniel jose on 08/02/2017.
  */
+import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoEvento;
 import com.vanesoft.vtrack.core.accesodatos.implementacion.DaoCorreo;
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoPedido;
 import com.vanesoft.vtrack.core.accesodatos.implementacion.FabricaDao;
 import com.vanesoft.vtrack.core.entidades.Correo;
+import com.vanesoft.vtrack.core.entidades.Evento;
 import com.vanesoft.vtrack.core.entidades.Pedido;
 import com.vanesoft.vtrack.core.utilidades.propiedades.CifrarDescifrar;
 import junit.framework.TestCase;
@@ -41,6 +43,19 @@ public class pruebaCorreo extends TestCase{
         IDaoPedido daoPedido = FabricaDao.obtenerDaoPedido();
         ArrayList<Pedido> pedidosEnBd =
                 daoPedido.consultarPedidosXEmpresa("dmscanniello@gmail.com");
+        assertEquals("hola","chao");
+    }
+
+    public void testConsultarEventosXPedido(){
+        IDaoEvento daoEvento = FabricaDao.obtenerDaoEvento();
+        ArrayList<Evento> eventos =
+                daoEvento.bucarEventosXPedido("1");
+        assertEquals("hola","chao");
+    }
+
+    public void testConsultarPedidoXCodigo(){
+        IDaoPedido daoPedido = FabricaDao.obtenerDaoPedido();
+        Pedido pedidoEnBd = daoPedido.consultarPedidosXCodigo("7");
         assertEquals("hola","chao");
     }
 }

@@ -9,13 +9,15 @@
  * Controller of the webAppVtrackApp
  */
 angular.module('webAppVtrackApp')
-    .controller('PedidosCtrl', ['$scope', '$location', '$rootScope','ServicioPedidos','$state',PedidosCtrl]);
+    .controller('PedidosCtrl', ['$scope', '$location', '$rootScope','ServicioPedidos','$state','ServicioDetalladoPedido','ServicioPerfil',PedidosCtrl]);
 
-function PedidosCtrl($scope, $location, $rootScope,ServicioPedidos,$state)
+function PedidosCtrl($scope, $location, $rootScope,ServicioPedidos,$state,ServicioDetalladoPedido,ServicioPerfil)
 {
     var view = $scope;
     this.inputBuscador = inputBuscador;
-    var modoDebug = true;
+    var modoDebug = false;
+
+
     /*
         Descripcion : agrega pedidos consultados del ws a la tabla del template
      */
@@ -25,21 +27,21 @@ function PedidosCtrl($scope, $location, $rootScope,ServicioPedidos,$state)
             var pedidos = $scope.pedidos;
             var estado = "";
             for(pedido in pedidos) {
-                if (pedidos[pedido].codigoPedido == 0)
+                if (pedidos[pedido].estado == 0)
                     estado = "En espera";
-                if (pedidos[pedido].codigoPedido == 1)
+                if (pedidos[pedido].estado == 1)
                     estado = "En Turno para Llenado";
-                if (pedidos[pedido].codigoPedido == 2)
+                if (pedidos[pedido].estado == 2)
                     estado = "Autorizado y Llamado a Llenado";
-                if (pedidos[pedido].codigoPedido == 3)
+                if (pedidos[pedido].estado == 3)
                     estado = "Pesado Inicial";
-                if (pedidos[pedido].codigoPedido == 4)
+                if (pedidos[pedido].estado == 4)
                     estado = "Llenando";
-                if (pedidos[pedido].codigoPedido == 5)
+                if (pedidos[pedido].estado == 5)
                     estado = "Llenado";
-                if (pedidos[pedido].codigoPedido == 6)
+                if (pedidos[pedido].estado == 6)
                     estado = "Pesado Final";
-                if (pedidos[pedido].codigoPedido == 7)
+                if (pedidos[pedido].estado == 7)
                     estado = "Cargado";
                 tbodyTablaPedidos.append('<tr class="filaTablaPedidos"><td>'+pedidos[pedido].codigoPedido+'</td><td>'+estado+'</td><td>'+pedidos[pedido].fechaCreacion+'</td></tr>');
             }
@@ -104,7 +106,7 @@ function PedidosCtrl($scope, $location, $rootScope,ServicioPedidos,$state)
                     return function() {
                         var cell = row.getElementsByTagName("td")[0];
                         var id = cell.innerHTML;
-                        alert("id:" + id);
+                        ServicioDetalladoPedido.setPedidoSeleccionado(id);
                         $state.go( 'dashboarddetalladopedido' );
                     };
                 };
@@ -128,7 +130,7 @@ function PedidosCtrl($scope, $location, $rootScope,ServicioPedidos,$state)
             })
             .catch(function (error) {
                 console.log('se produjo un error llamando al servicio rest');
-
+                $state.go( 'login' );
             });
         console.log('saliendo de el metodo getAllPedidos');
     }
@@ -142,12 +144,30 @@ function PedidosCtrl($scope, $location, $rootScope,ServicioPedidos,$state)
         else {
             if (modoDebug == true) {
                 console.log('modoDebug activado');
-                getAllPedidos();
+
             }
             else {
+                getAllPedidos();
+                consultarEmpresa();
                 console.log('modoDebug Desactivado');
             }
         }
         console.log('saliendo del mtodo onloadpage');
     };
+    
+    function  consultarEmpresa() {
+        console.log('entrando a la funcion consultarEmpresa');
+        ServicioPerfil.getUsuario($rootScope.correouser)
+            .then(function(data){
+                console.log('se hizo correctamente llamada al servicio rest');
+                var pNombreEmpresa =
+                    angular.element(document.querySelector('#nombreEmpresa'));
+                pNombreEmpresa.append(data.nombreempresa);
+            })
+            .catch(function (error) {
+                console.log('se produjo un error llamando al servicio rest');
+                $state.go( 'login' );
+            });
+        console.log('saliendo de la funcion consultarEmpresa');
+    }
 }

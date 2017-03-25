@@ -13,11 +13,7 @@ import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.*;
 import controllers.BaseController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -34,6 +30,32 @@ import javax.ws.rs.core.MediaType;
 @Path("/usuario")
 public class UsuarioController extends BaseController {
 
+
+    /*
+        nombre : doGet
+        Descripcion : metodo consulta la informacion de empresa para el perfil de usuario
+        creacion : 22/03/2017
+        Parametros : correoEmpresa
+        @author montda
+        @version 1.0
+     */
+    @Path("/{correoEmpresa}")
+    @GET
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Object goGet(@PathParam("correoEmpresa") String correoEmpresa)
+    {
+        usuario userEnBd = null;
+        try
+        {
+            userEnBd = buscarUserXCorreo(correoEmpresa);
+        }
+        catch (LogicaException e)
+        {
+            return obtenerMensajeDeError( e );
+        }
+        return userEnBd;
+    }
     /*
         nombre : autoRegistro
         Descripcion : metodo que termina el proceso de autoregistro del usuario
@@ -327,5 +349,14 @@ public class UsuarioController extends BaseController {
         }
 
         return super.obtenerMensajeDeError(e);
+    }
+
+    public usuario buscarUserXCorreo(String correoEmpresa)
+    {
+        usuario usuarioBusqueda = new usuario();
+        usuarioBusqueda.setUsername(correoEmpresa);
+        ComandoConsultarUsuario  comandoConsultarUsuario =
+                FabricaComando.obtenerComandoConsultarUsuario(usuarioBusqueda);
+        return comandoConsultarUsuario.ejecutar();
     }
 }

@@ -18,6 +18,7 @@ function ServicioLogin($q,$rootScope,$http,BASE_URL,$scope)
     this.validarAutoregistro = validarAutoregistro;
     this.autoregistro = autoregistro;
     this.getToken = getToken;
+    this.modificarContrasenaUsuarioPerfil = modificarContrasenaUsuarioPerfil;
     /*
          metodo encargado de terminar el proceso de autoregistro
          parametros
@@ -94,6 +95,39 @@ function ServicioLogin($q,$rootScope,$http,BASE_URL,$scope)
         var defered = $q.defer();
         var promise = defered.promise;
         var usuario = {"username": $rootScope.correoUsuario,"password": password};
+        console.log('saliendo del metodo validarUsuarioBloqueado');
+        $http
+        ({
+            method: 'put',
+            url: BASE_URL + '/usuario/password',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic ' + $rootScope.token
+            },
+            data: JSON.stringify(usuario)
+        }).then(function success(response)
+        {
+            console.log(response);
+            defered.resolve(response.data);
+        },function error(response)
+        {
+            console.log('error: '+response);
+            var error = response.data;
+            defered.reject(error.mensaje);
+        });
+
+        return promise;
+        console.log('entrando al metodo modificarContrasenaUsuario');
+    }
+    /*
+     funcion que llama al servicio REST para modificar la contrasena
+     de un usuario
+     */
+    function modificarContrasenaUsuarioPerfil(login,password) {
+        console.log('entrando al metodo modificarContrasenaUsuario');
+        var defered = $q.defer();
+        var promise = defered.promise;
+        var usuario = {"username": $rootScope.correouser,"password": password};
         console.log('saliendo del metodo validarUsuarioBloqueado');
         $http
         ({

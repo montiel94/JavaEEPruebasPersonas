@@ -69,7 +69,21 @@ angular
                         controller: 'MasterCtrl'
                     },
                     'Detalladopedido@dashboarddetalladopedido':{
-                        templateUrl: 'views/dashboard/detalladoPedidoTemplate.html'
+                        templateUrl: 'views/dashboard/detalladoPedidoTemplate.html',
+                        controller:'DetalladoPedidoCtrl'
+                    }
+                }
+            })
+            .state('perfil',{
+                url: '/perfil',
+                views: {
+                    '': {
+                        templateUrl: 'views/dashboard/dashboard.html',
+                        controller: 'MasterCtrl'
+                    },
+                    'perfil@perfil': {
+                        templateUrl: 'views/dashboard/perfilTemplate.html',
+                        controller: 'PerfilCtrl'
                     }
                 }
             })

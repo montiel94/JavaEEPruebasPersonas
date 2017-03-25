@@ -3,6 +3,8 @@ package com.vanesoft.vtrack.webservice.logica.implementacion;
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.correo.ComandoEnviarCorreo;
+import com.vanesoft.vtrack.webservice.logica.implementacion.evento.ComandoConsultarEventosXPedido;
+import com.vanesoft.vtrack.webservice.logica.implementacion.pedido.ComandoBuscarPedidoXCodigo;
 import com.vanesoft.vtrack.webservice.logica.implementacion.pedido.ComandoBuscarPedidosXEmpresa;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoEliminarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
@@ -200,4 +202,31 @@ public final class FabricaComando {
     public static ComandoBuscarPedidosXEmpresa  obtenerComandoBuscarPedidosXEmpresa (String correoEmpresa){
         return new ComandoBuscarPedidosXEmpresa(correoEmpresa);
     }
+
+    /**
+     * Nombre:                  obtenerComandoBuscarPedidosXEmpresa
+     * Descripcion:             genera el comando ComandoBuscarPedidosXEmpresa
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 21/03/17
+     */
+    public static ComandoConsultarEventosXPedido obtenerComandoConsultarEventosXPedido (String codigoPedido){
+        return new ComandoConsultarEventosXPedido(codigoPedido);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoBuscarPedidoXCodigo
+     * Descripcion:             genera el comando ComandoBuscarPedidoXCodigo
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 21/03/17
+     */
+    public static ComandoBuscarPedidoXCodigo obtenerComandoBuscarPedidoXCodigo (String codigoPedido){
+        return new ComandoBuscarPedidoXCodigo(codigoPedido);
+    }
+
 }

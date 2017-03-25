@@ -45,4 +45,34 @@ public class DaoPedido extends Dao implements IDaoPedido{
 
         return pedidosArray;
     }
+
+    public Pedido consultarPedidosXCodigo(String codigoPedido)
+    {
+        Pedido pedidoEnBd = new Pedido();
+        try {
+
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query = "SELECT PED.ID,PED.ESTADO,convert(varchar,PED.SOLICITUD, 103) AS SOLICITUD,PED.COLA,PED.CABEZOTE,PED.CHOFER,PED.INICIO,PED.FIN "+
+                           "FROM VTRACK_PEDIDO PED "+
+                            "WHERE PED.ID = "+codigoPedido+"";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                pedidoEnBd = new Pedido();
+                pedidoEnBd.setCodigoPedido(Integer.valueOf(rs.getString("ID")));
+                pedidoEnBd.setEstado(Integer.valueOf(rs.getString("ESTADO")));
+                pedidoEnBd.setFechaCreacion(rs.getString("SOLICITUD"));
+                pedidoEnBd.setCola(rs.getString("COLA"));
+                pedidoEnBd.setCabezote(rs.getString("CABEZOTE"));
+                pedidoEnBd.setChofer(rs.getString("CHOFER"));
+                pedidoEnBd.setInicio(rs.getString("INICIO"));
+                pedidoEnBd.setFin(rs.getString("FIN"));
+            }
+
+        }catch (Exception e){
+
+        }
+
+        return pedidoEnBd;
+    }
 }

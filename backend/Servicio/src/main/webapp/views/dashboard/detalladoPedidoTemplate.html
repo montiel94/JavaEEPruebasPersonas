@@ -1,1 +1,64 @@
-<p>TEMPLATE DETALLADO DE PEDIDO</p>
+
+<div style=" margin-bottom: 40px;" class="col-lg-12" id = "tabla"  ng-controller="DetalladoPedidoCtrl" data-ng-init="init()">
+    <rd-widget>
+            <div class="table-responsive">
+                <table class="table" id="myTable">
+                    <tr class="header">
+                        <th class="headerTablaPedidoDetallado" COLSPAN=2 style="width:100%;">Informacion</th>
+                    </tr>
+
+                    <colgroup>
+                        <col style="width: 50%" />
+                        <col style="width: 50%" />
+                    </colgroup>
+                    <tbody id = 'filasInformacion'>
+                    <!--<tr style="text-align:center;"><td>Codigo del pedido</td><td>6237</td></tr>
+                    <tr style="text-align:center;"><td>Conductor</td><td >Daniel Jose Montiel Scanniello</td></tr>
+                    <tr style="text-align:center;"><td>Estado</td><td >Autorizado y llamado a llenado</td></tr>
+                    <tr style="text-align:center;"><td>Fecha de creacion</td><td>17-03-2017</td></tr>-->
+                    </tbody>
+                </table>
+            </div>
+    </rd-widget>
+</div>
+
+
+<div style=" margin-bottom: 40px;" class="col-lg-12" id = "tablaVehiculo">
+    <rd-widget>
+        <div class="table-responsive">
+            <table class="table" id="myTableVehiculo">
+                <tr class="header">
+                    <th class="headerTablaPedidoDetallado" COLSPAN=2 style="width:100%;">Vehiculo de transporte</th>
+                </tr>
+                <colgroup>
+                    <col style="width: 50%" />
+                    <col style="width: 50%" />
+                </colgroup>
+                <!--<tr style="text-align:center;"><td>Placa de la sisterna</td><td >QWE-123</td></tr>
+                <tr style="text-align:center;"><td>Placa del chuto</td><td >098-POI</td></tr>-->
+                <tbody id="tbodyInformacionVehiculo">
+                </tbody>
+            </table>
+        </div>
+    </rd-widget>
+</div>
+
+<div style=" margin-bottom: 40px;" class="col-lg-12" id = "tablaEventos">
+    <rd-widget>
+        <div class="table-responsive">
+            <table class="table" id="myTableEventos">
+                <tr class="header">
+                    <th style="width:50%;" class="headerTablaPedidoDetallado">Evento</th>
+                    <th style="width:50%;" class="headerTablaPedidoDetallado">Hora</th>
+                </tr>
+                <!--<tr style="text-align:center;"><td>En espera</td><td >10:00:00 AM</td></tr>
+                <tr style="text-align:center;"><td>En turno</td><td >11:00:00 AM</td></tr>
+                <tr style="text-align:center;"><td>Autorizado y llamado a llenado</td><td>12:00:00 M</td></tr>
+                <tr style="text-align:center;"><td>Pesado inicial</td><td>1:00:00 PM</td></tr>-->
+                <tbody id="tbodyInformacionEventos">
+                </tbody>
+            </table>
+        </div>
+    </rd-widget>
+</div>
+

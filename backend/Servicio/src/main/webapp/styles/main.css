@@ -164,4 +164,34 @@ body {
     color: white;
     border-left: 7px solid #e99d1a;
   }
+  .tdPedidoDetallado{
+    border: 1px solid #30426a;
+    text-align: left;
+    padding: 8px;
+  }
+
+  .tableConductorPedidoDetallado{
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .headerTablaPedidoDetallado{
+    background-color: #30426a;
+    color: white;
+    text-align:center;
+    vertical-align:middle;
+  }
+
+  .divperfil{
+    width: 300px;
+    height:auto;
+    float: left;
+    margin-top: -8px;
+  }
+
+  .diviconomodificarcontrasena{
+    width: 30px;
+    height:auto;
+    float: left;
+    margin-top: -8px;
+  }
 }

@@ -1,6 +1,7 @@
 package com.vanesoft.vtrack.core.entidades;
 
 import java.beans.Visibility;
+import java.util.ArrayList;
 
 /**
  * Created by Daniel jose on 12/03/2017.
@@ -15,6 +16,15 @@ public class Pedido {
     String chofer;
     String inicio;
     String fin;
+    ArrayList<Evento> eventos;
+
+    public ArrayList<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(ArrayList<Evento> eventos) {
+        this.eventos = eventos;
+    }
 
     public Pedido(int codigoPedido, int estado, String fechaCreacion) {
         this.codigoPedido = codigoPedido;
@@ -25,7 +35,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int codigoPedido, int estado, String fechaCreacion, String cola, String cabezote, String chofer, String inicio, String fin) {
+    public Pedido(int codigoPedido, int estado, String fechaCreacion, String cola, String cabezote, String chofer, String inicio, String fin,ArrayList<Evento> eventos) {
         this.codigoPedido = codigoPedido;
         this.estado = estado;
         this.fechaCreacion = fechaCreacion;
@@ -34,6 +44,7 @@ public class Pedido {
         this.chofer = chofer;
         this.inicio = inicio;
         this.fin = fin;
+        this.eventos = eventos;
     }
 
     public int getCodigoPedido() {

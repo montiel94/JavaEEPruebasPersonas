@@ -1,0 +1,41 @@
+<div class="col-xs-12" ng-controller="PerfilCtrl" data-ng-init="init()">
+    <rd-widget>
+        <rd-widget-body>
+
+                <div class="widget-icon blue pull-left">
+                    <i class="fa fa-user"></i>
+                </div>
+
+            <div class="title" id="divtitulo">Empresa : </div>
+            <div class="comment">PERFIL</div>
+        </rd-widget-body>
+    </rd-widget>
+
+
+    <rd-widget>
+        <rd-widget-body>
+            <div class="comment divperfil" >Nombre : </div>
+            <div class="comment divperfil" id="divnombre"></div>
+        </rd-widget-body>
+    </rd-widget>
+    <rd-widget>
+        <rd-widget-body>
+            <div class="comment divperfil" >Correo : </div>
+            <div class="comment divperfil" id="divcorreo"></div>
+        </rd-widget-body>
+    </rd-widget>
+    <rd-widget>
+        <rd-widget-body>
+            <div class="comment divperfil" >Estado : </div>
+            <div class="comment divperfil" id="divestado"></div>
+        </rd-widget-body>
+    </rd-widget>
+    <rd-widget>
+        <rd-widget-body>
+            <a href ng-click="bajarModalModificarContrasena()"><span style="margin-right: 25px;" class="menu-icon fa fa-pencil-square-o"></span>Modificar contraseña</a>
+        </rd-widget-body>
+    </rd-widget>
+    <br/>
+    <br/>
+    <div data-ng-show="showError" id = "zonaerror" ng-class="{fade:doFade}">{{errorMessage}}</div>
+</div>

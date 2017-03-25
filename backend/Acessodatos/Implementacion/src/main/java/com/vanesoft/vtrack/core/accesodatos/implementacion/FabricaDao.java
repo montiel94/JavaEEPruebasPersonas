@@ -90,4 +90,15 @@ public final class FabricaDao {
      */
     public static IDaoPedido obtenerDaoPedido(){ return new DaoPedido();}
 
+    /**
+     * Nombre:                  obtenerDaoEvento
+     * Descripcion:             genera el DAOEvento
+     *
+     * @return el dao
+     * @version 1.0
+     * @author montda
+     * @since 21/03/17
+     */
+    public static IDaoEvento obtenerDaoEvento(){ return new DaoEvento();}
+
 }

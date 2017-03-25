@@ -16,7 +16,7 @@
             </li>
 
             <li class="sidebar-list">
-                <a href>Perfil<span class="menu-icon fa fa-user"></span></a>
+                <a href ng-click="goToPerfil()">Perfil<span class="menu-icon fa fa-user"></span></a>
             </li>
 
             <li class="sidebar-list">
@@ -110,6 +110,7 @@
             <div ui-view="pedidosGeneral"></div>
             <div ui-view="SolicitarPedido"></div>
             <div ui-view="Detalladopedido"></div>
+            <div ui-view="perfil"></div>
             <!--<dashboarddirective></dashboarddirective>-->
 
         </div><!-- End Page Content -->

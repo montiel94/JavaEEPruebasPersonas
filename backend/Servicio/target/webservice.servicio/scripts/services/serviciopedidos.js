@@ -15,7 +15,7 @@ function ServicioPedidos($q,$rootScope,$http,BASE_URL,$scope) {
         $http
         ({
             method: 'GET',
-            url: BASE_URL + '/pedidos/all/'+$rootScope.correouser,
+            url: BASE_URL + '/pedido/all/'+$rootScope.correouser,
             headers: {
                 'Authorization': $rootScope.tokenAuth,
                 'Content-Type': 'application/json'
