@@ -5,9 +5,11 @@ import com.vanesoft.vtrack.core.entidades.EstadoUsuario;
 import com.vanesoft.vtrack.core.entidades.TipoPlantilla;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.core.excepciones.LogicaException;
+import com.vanesoft.vtrack.core.utilidades.propiedades.CifrarDescifrar;
 import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesLogica;
 import com.vanesoft.vtrack.core.utilidades.propiedades.PropiedadesServicios;
 import com.vanesoft.vtrack.webservice.logica.implementacion.FabricaComando;
+import com.vanesoft.vtrack.webservice.logica.implementacion.interceptores.TokenSecurity;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
 import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.*;
 import controllers.BaseController;
@@ -33,17 +35,18 @@ public class UsuarioController extends BaseController {
 
     /*
         nombre : doGet
-        Descripcion : metodo consulta la informacion de empresa para el perfil de usuario
+        Descripcion 0: metodo consulta la informacion de empresa para el perfil de usuario
         creacion : 22/03/2017
         Parametros : correoEmpresa
         @author montda
-        @version 1.0
+        @version 1.
      */
     @Path("/{correoEmpresa}")
     @GET
+    @TokenSecurity
     @Produces("application/json")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Object goGet(@PathParam("correoEmpresa") String correoEmpresa)
+    public Object goGet(@HeaderParam("Authorization") String Authorization,@PathParam("correoEmpresa") String correoEmpresa)
     {
         usuario userEnBd = null;
         try
@@ -55,6 +58,34 @@ public class UsuarioController extends BaseController {
             return obtenerMensajeDeError( e );
         }
         return userEnBd;
+    }
+    /*
+        nombre : doGet
+        Descripcion : metodo consulta la informacion de empresa para el perfil de usuario
+        creacion : 22/03/2017
+        Parametros : correoEmpresa
+        @author montda
+        @version 1.0
+     */
+    @Path("ConfirmarPassword/{correoEmpresa}/{password}")
+    @GET
+    @Produces("application/json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Object goGetPassword(@PathParam("correoEmpresa") String correoEmpresa,@PathParam("password") String password)
+    {
+        usuario userEnBd = null;
+        try
+        {
+            userEnBd = buscarUserXCorreo(correoEmpresa);
+            if (password.equals(CifrarDescifrar.descifradoSeguro(userEnBd.getPassword())))
+                return true;
+            else
+                return false;
+        }
+        catch (LogicaException e)
+        {
+            return obtenerMensajeDeError( e );
+        }
     }
     /*
         nombre : autoRegistro

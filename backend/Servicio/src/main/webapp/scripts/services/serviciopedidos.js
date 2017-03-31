@@ -11,7 +11,7 @@ function ServicioPedidos($q,$rootScope,$http,BASE_URL,$scope) {
     function getAllPedidos() {
         console.log('entrando al metodo getAllPedidos');
         var defered = $q.defer();
-        var promise = defered.promise;
+        var promise = defered.promise;  
         $http
         ({
             method: 'GET',
