@@ -7,4 +7,5 @@ public class TipoPlantilla {
 
     public static final String usuariobloqueadointentoslogin = "CORREO BLOQUEO DE USUARIO POR INTENTOS FALLIDOS LOGIN";
     public static final String usuarioolvidocontrasena = "USUARIO OLVIDO CONTRASENA";
+    public static final String pedidofinalizollenado = "PEDIDO FINALIZADO";
 }

@@ -63,4 +63,12 @@ public interface IDaoUsuario {
      * @since 09/02/2017
      */
     public boolean modificarContrasenaUsuario(usuario usuarioModificando,String contrasena);
+    /**
+     * Descripcion: metodo qque busca un usuario ddueno de un pedido
+     *
+     * @version 1.0
+     * @author montda
+     * @since 09/02/2017
+     */
+    public usuario buscarUsuarioXCodigoPedido(String codigoPedido);
 }

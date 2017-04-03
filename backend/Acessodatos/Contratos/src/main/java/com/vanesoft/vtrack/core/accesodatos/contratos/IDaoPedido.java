@@ -13,4 +13,8 @@ public interface IDaoPedido {
 
     public Pedido consultarPedidosXCodigo(String codigoPedido);
 
+    public Boolean modificarEstadoPedidoXCodigo(String codigoPedido,String Estado);
+
+    public Boolean modificarDateTimeFinPedidoXCodigo(String codigoPedido);
+
 }

@@ -4,8 +4,7 @@ import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.correo.ComandoEnviarCorreo;
 import com.vanesoft.vtrack.webservice.logica.implementacion.evento.ComandoConsultarEventosXPedido;
-import com.vanesoft.vtrack.webservice.logica.implementacion.pedido.ComandoBuscarPedidoXCodigo;
-import com.vanesoft.vtrack.webservice.logica.implementacion.pedido.ComandoBuscarPedidosXEmpresa;
+import com.vanesoft.vtrack.webservice.logica.implementacion.pedido.*;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoEliminarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarToken;
@@ -228,5 +227,47 @@ public final class FabricaComando {
     public static ComandoBuscarPedidoXCodigo obtenerComandoBuscarPedidoXCodigo (String codigoPedido){
         return new ComandoBuscarPedidoXCodigo(codigoPedido);
     }
+
+    /**
+     * Nombre:                  obtenerComandoModificarEstadoPedidoXCodigo
+     * Descripcion:             genera el comando ComandoModificarEstadoPedidoXCodigo
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 02/04/17
+     */
+    public static ComandoModificarEstadoPedidoXCodigo obtenerComandoModificarEstadoPedidoXCodigo (String codigoPedido,String estadoPedido){
+        return new ComandoModificarEstadoPedidoXCodigo(codigoPedido,estadoPedido);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoModificarDateTimeFinPedidoXCodigo
+     * Descripcion:             genera el comando ComandoModificarDateTimeFinPedidoXCodigo
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 02/04/17
+     */
+    public static ComandoModificarDateTimeFinPedidoXCodigo obtenerComandoComandoModificarDateTimeFinPedidoXCodigo (String codigoPedido){
+        return new ComandoModificarDateTimeFinPedidoXCodigo(codigoPedido);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoBuscarUsuarioXcodigoPedido
+     * Descripcion:             genera el comando ComandoBuscarUsuarioXcodigoPedido
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 02/04/17
+     */
+    public static ComandoBuscarUsuarioXcodigoPedido obtenerComandoBuscarUsuarioXcodigoPedido (String codigoPedido){
+        return new ComandoBuscarUsuarioXcodigoPedido(codigoPedido);
+    }
+
+
+
 
 }

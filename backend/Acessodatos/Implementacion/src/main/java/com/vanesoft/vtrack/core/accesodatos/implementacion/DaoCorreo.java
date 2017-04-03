@@ -109,6 +109,32 @@ public class DaoCorreo implements IDaoCorreo{
         return exito;
     }
 
+    public boolean armarCorreoPedidoEstado( usuario usuarioEnviarCorreo, Pedido pedido, String estado)
+    {
+        boolean exito = false;
+        IDaoPlantilla daoPlantilla = FabricaDao.obtenerDaoPlantilla();
+        Plantilla plantillaEnBd = daoPlantilla.consultarPlantilla(TipoPlantilla.pedidofinalizollenado);
+        IDaoParametro daoParametro = FabricaDao.obtenerDaoParametro();
+        ArrayList parametrosPlantillaEnBd = daoParametro.consultarParametrosXPlantilla(TipoPlantilla.pedidofinalizollenado);
+        Hashtable<String, String> valores = new Hashtable<String, String>();
+        valores.put(ParametroMensaje.nombreParametroNombreUsuario, usuarioEnviarCorreo.getNombreempresa());
+        valores.put(ParametroMensaje.nombreParametroCodigoPedido, String.valueOf(pedido.getCodigoPedido()));
+        valores.put(ParametroMensaje.nombreHoraFinLlenado,pedido.getFin());
+        valores.put(ParametroMensaje.nombreHoraInicioLlenado,pedido.getInicio());
+        valores.put(ParametroMensaje.nombreChofer,pedido.getChofer());
+        valores.put(ParametroMensaje.nombreCola,pedido.getCola());
+        valores.put(ParametroMensaje.nombreCabezote,pedido.getCabezote());
+        valores.put(ParametroMensaje.nombreEstadoPedido,estado);
+        String MensajeFinal = Armador.armarMensaje(plantillaEnBd.getTexto(), parametrosPlantillaEnBd, valores);
+        Correo correoEnviando = new Correo(PropiedadesAccesoDatos.CONFIG_CORREO_REMINENTE,
+                usuarioEnviarCorreo.getUsername(), PropiedadesAccesoDatos.CONFIG_CONTRASENA_REMINENTE, plantillaEnBd.getTitulo(),
+                MensajeFinal);
+        enviarCorreo(correoEnviando);
+
+        exito = true;
+        return exito;
+    }
+
     public Boolean envioCorreoUsuarioParametrizado (usuario usuarioEnviarCorreo,String tipoPlantillaa)
     {
         Boolean exito = false;

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="demonios.servicios.consultor:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/demonios_servicios_consultor_jar</output-path>
+    <root id="archive" name="demonios.servicios.consultor.jar">
+      <element id="module-output" name="demonios.servicios.consultor" />
+    </root>
+  </artifact>
+</component>

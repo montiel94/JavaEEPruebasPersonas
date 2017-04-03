@@ -191,6 +191,38 @@ public class DaoUsuario extends Dao implements IDaoUsuario{
         return true;
     }
 
+    /*
+        Descripcion : busca en bd usuario registrado con un codigo de pedido
+        @author : montda
+        @since : 02/04/2017
+        return : entidad usuario
+    */
+    public usuario buscarUsuarioXCodigoPedido(String codigoPedido){
+        usuario UsuarioenBd = null;
+        try {
+
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query =   "SELECT US.ID, US.CORREO, US.CONTRASEÑA, US.INTENTOSLOGIN, US.ESTADO, US.NOMBREEMPRESA "+
+                             "FROM VTRACK_USUARIO US, VTRACK_PEDIDO PE "+
+                             "WHERE PE.ID = "+codigoPedido+" AND PE.FK_USUARIO = US.ID";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                UsuarioenBd = new usuario();
+                UsuarioenBd.setId(Integer.parseInt(rs.getString("ID")));
+                UsuarioenBd.setUsername(rs.getString("CORREO"));
+                UsuarioenBd.setPassword(rs.getString("CONTRASEÑA"));
+                UsuarioenBd.setEstadoUsuario(rs.getString("ESTADO"));
+                UsuarioenBd.setNombreempresa(rs.getString("NOMBREEMPRESA"));
+                UsuarioenBd.setIntentosLogin(Integer.parseInt(rs.getString("INTENTOSLOGIN")));
+
+            }
+
+        }catch (Exception e){
+
+        }
+        return UsuarioenBd;
+    }
 
 
 }

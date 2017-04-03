@@ -41,6 +41,41 @@ public class Armador {
                 mensajeParametrisado = mensajeParametrisado.replace(parametro,
                         valores.get(ParametroMensaje.NombreParametroPassword));
             }
+            if (parametro.equals(ParametroMensaje.codigopedido))
+            {
+                mensajeParametrisado = mensajeParametrisado.replace(parametro,
+                        valores.get(ParametroMensaje.nombreParametroCodigoPedido));
+            }
+            if (parametro.equals(ParametroMensaje.horaInicioLlenado))
+            {
+                mensajeParametrisado = mensajeParametrisado.replace(parametro,
+                        valores.get(ParametroMensaje.nombreHoraInicioLlenado));
+            }
+            if (parametro.equals(ParametroMensaje.horaFinLlenado))
+            {
+                mensajeParametrisado = mensajeParametrisado.replace(parametro,
+                        valores.get(ParametroMensaje.nombreHoraFinLlenado));
+            }
+            if (parametro.equals(ParametroMensaje.chofer))
+            {
+                mensajeParametrisado = mensajeParametrisado.replace(parametro,
+                        valores.get(ParametroMensaje.nombreChofer));
+            }
+            if (parametro.equals(ParametroMensaje.cabezote))
+            {
+                mensajeParametrisado = mensajeParametrisado.replace(parametro,
+                        valores.get(ParametroMensaje.nombreCabezote));
+            }
+            if (parametro.equals(ParametroMensaje.cola))
+            {
+                mensajeParametrisado = mensajeParametrisado.replace(parametro,
+                        valores.get(ParametroMensaje.nombreCola));
+            }
+            if (parametro.equals(ParametroMensaje.estadoPedido))
+            {
+                mensajeParametrisado = mensajeParametrisado.replace(parametro,
+                        valores.get(ParametroMensaje.nombreEstadoPedido));
+            }
         }
         return mensajeParametrisado;
     }

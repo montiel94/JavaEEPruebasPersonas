@@ -36,6 +36,8 @@ public class PropiedadesServicios extends PropiedadesBase {
             = get("respuesta.errorinesperado");
     public static final String RESPUESTA_ERROR_USUARIO_POSEE_TOKEN
             =get("respuesta.errorusuarioposeetoken");
+    public static final String CONFIG_ESTADO_ENVIOCORREO_FINALIZADO_PEDIDO
+            = get("config.estadoenviocorreofinalizadopedido");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

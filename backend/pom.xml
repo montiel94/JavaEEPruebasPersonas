@@ -13,6 +13,8 @@
         <module>Logica</module>
         <module>Acessodatos</module>
         <module>Comun</module>
+        <module>Demonios</module>
+        <module>Actualizador</module>
     </modules>
 
 

@@ -1,6 +1,7 @@
 package com.vanesoft.vtrack.core.accesodatos.implementacion;
 
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoPedido;
+import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.Pedido;
 
 import java.sql.Connection;
@@ -75,4 +76,49 @@ public class DaoPedido extends Dao implements IDaoPedido{
 
         return pedidoEnBd;
     }
+
+    /*
+        nombre : modificarEstadoPedidoXCodigo
+        params : @Params codigoPedido : codigo del pedido a modificar
+        @Params Estado estado del pedido actual
+        Descripcion : metodo que modfica el estado del pedido
+     */
+    public Boolean modificarEstadoPedidoXCodigo(String codigoPedido,String Estado) {
+        try {
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE VTRACK_PEDIDO "+
+                           "SET ESTADO =  "+Estado+" "+
+                           "WHERE ID= "+codigoPedido+" ";
+            stmt.execute(query);
+            connection.close();
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    /*
+        nombre : modificarDateTimeFinPedidoXCodigo
+        params : @Params codigoPedido : codigo del pedido a modificar
+        Descripcion : pone en bd el datetime en la tabla pedidos cuando este pedido finalizo
+     */
+    public Boolean modificarDateTimeFinPedidoXCodigo(String codigoPedido) {
+        try {
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query = "UPDATE VTRACK_PEDIDO " +
+                            "SET FIN = SYSDATETIME()" +
+                            "WHERE ID = "+codigoPedido+"";
+            stmt.execute(query);
+            connection.close();
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+
 }

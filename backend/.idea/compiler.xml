@@ -11,24 +11,31 @@
         <module name="core.comun.entidades" />
         <module name="core.comun.excepciones" />
         <module name="core.comun.utilidades" />
+        <module name="demonios.servicios.consultor" />
+        <module name="demonios.servicios.informante" />
         <module name="webservice.logica.contratos" />
         <module name="webservice.logica.implementacion" />
         <module name="webservice.servicio" />
+        <module name="webservice.servicioactualizador" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.7">
-      <module name="backend" target="1.7" />
-      <module name="core.accesodatos" target="1.7" />
-      <module name="core.accesodatos.contratos" target="1.7" />
+      <module name="backend" target="1.5" />
+      <module name="core.accesodatos" target="1.5" />
+      <module name="core.accesodatos.contratos" target="1.5" />
       <module name="core.accesodatos.implementacion" target="1.5" />
-      <module name="core.comun" target="1.7" />
-      <module name="core.comun.entidades" target="1.7" />
-      <module name="core.comun.excepciones" target="1.7" />
+      <module name="core.comun" target="1.5" />
+      <module name="core.comun.entidades" target="1.5" />
+      <module name="core.comun.excepciones" target="1.5" />
       <module name="core.comun.utilidades" target="1.7" />
-      <module name="webservice.logica" target="1.7" />
+      <module name="demonios.servicios" target="1.5" />
+      <module name="demonios.servicios.consultor" target="1.5" />
+      <module name="demonios.servicios.informante" target="1.5" />
+      <module name="webservice.logica" target="1.5" />
       <module name="webservice.logica.contratos" target="1.7" />
-      <module name="webservice.logica.implementacion" target="1.7" />
-      <module name="webservice.servicio" target="1.7" />
+      <module name="webservice.logica.implementacion" target="1.6" />
+      <module name="webservice.servicio" target="1.5" />
+      <module name="webservice.servicioactualizador" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

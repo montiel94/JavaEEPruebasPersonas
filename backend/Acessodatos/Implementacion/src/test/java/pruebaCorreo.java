@@ -2,12 +2,13 @@
  * Created by Daniel jose on 08/02/2017.
  */
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoEvento;
+import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoUsuario;
 import com.vanesoft.vtrack.core.accesodatos.implementacion.DaoCorreo;
 import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoPedido;
+import com.vanesoft.vtrack.core.accesodatos.implementacion.DaoPedido;
+import com.vanesoft.vtrack.core.accesodatos.implementacion.DaoUsuario;
 import com.vanesoft.vtrack.core.accesodatos.implementacion.FabricaDao;
-import com.vanesoft.vtrack.core.entidades.Correo;
-import com.vanesoft.vtrack.core.entidades.Evento;
-import com.vanesoft.vtrack.core.entidades.Pedido;
+import com.vanesoft.vtrack.core.entidades.*;
 import com.vanesoft.vtrack.core.utilidades.propiedades.CifrarDescifrar;
 import junit.framework.TestCase;
 
@@ -39,6 +40,17 @@ public class pruebaCorreo extends TestCase{
         assertEquals(contrasena,daoCorreo.generarContrasenaProvisional(8));
     }
 
+    public void testEnviCorreoFinalizoPedido()
+    {
+        DaoCorreo daoCorreo = new DaoCorreo();
+        DaoUsuario daoUsuario = new DaoUsuario();
+        DaoPedido daoPedido = new DaoPedido();
+        usuario user = daoUsuario.buscarUsuarioXCorreoElectronico("dmscanniello@gmail.com");
+        Pedido ped = daoPedido.consultarPedidosXCodigo("1");
+        daoCorreo.armarCorreoPedidoEstado(user,ped, EstadoPedido.llenado);
+        assertEquals("hola","hola");
+    }
+
     public void testConsultarPedidosXUsuario(){
         IDaoPedido daoPedido = FabricaDao.obtenerDaoPedido();
         ArrayList<Pedido> pedidosEnBd =
@@ -57,5 +69,17 @@ public class pruebaCorreo extends TestCase{
         IDaoPedido daoPedido = FabricaDao.obtenerDaoPedido();
         Pedido pedidoEnBd = daoPedido.consultarPedidosXCodigo("7");
         assertEquals("hola","chao");
+    }
+
+    public void testModificarEstadoPedidoXCodgio(){
+        IDaoPedido daoPedido = FabricaDao.obtenerDaoPedido();
+        daoPedido.modificarEstadoPedidoXCodigo("1","1");
+        assertEquals("hola","chao");
+    }
+
+    public void testBuscarUsuarioXcodigoPedido(){
+        IDaoUsuario daoUsuario = FabricaDao.obtenerDaoUsuario();
+        usuario usuarioEnBd = daoUsuario.buscarUsuarioXCodigoPedido("1");
+        assertEquals("hola","hola");
     }
 }

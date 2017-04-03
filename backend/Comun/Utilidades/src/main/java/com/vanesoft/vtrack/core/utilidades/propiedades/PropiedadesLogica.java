@@ -36,6 +36,8 @@ public class PropiedadesLogica extends PropiedadesBase {
             = get("error.errorinesperado");
     public static final String ERROR_USUARIO_POSEE_TOKEN
             = get("error.usuarioposeecodigoauth");
+
+
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

@@ -10,10 +10,14 @@
       <module fileurl="file://$PROJECT_DIR$/Comun/Entidades/core.comun.entidades.iml" filepath="$PROJECT_DIR$/Comun/Entidades/core.comun.entidades.iml" />
       <module fileurl="file://$PROJECT_DIR$/Comun/Excepciones/core.comun.excepciones.iml" filepath="$PROJECT_DIR$/Comun/Excepciones/core.comun.excepciones.iml" />
       <module fileurl="file://$PROJECT_DIR$/Comun/Utilidades/core.comun.utilidades.iml" filepath="$PROJECT_DIR$/Comun/Utilidades/core.comun.utilidades.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Demonios/demonios.servicios.iml" filepath="$PROJECT_DIR$/Demonios/demonios.servicios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Demonios/Consultor/demonios.servicios.consultor.iml" filepath="$PROJECT_DIR$/Demonios/Consultor/demonios.servicios.consultor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Demonios/Informante/demonios.servicios.informante.iml" filepath="$PROJECT_DIR$/Demonios/Informante/demonios.servicios.informante.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logica/webservice.logica.iml" filepath="$PROJECT_DIR$/Logica/webservice.logica.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logica/Contratos/webservice.logica.contratos.iml" filepath="$PROJECT_DIR$/Logica/Contratos/webservice.logica.contratos.iml" />
       <module fileurl="file://$PROJECT_DIR$/Logica/Implementacion/webservice.logica.implementacion.iml" filepath="$PROJECT_DIR$/Logica/Implementacion/webservice.logica.implementacion.iml" />
       <module fileurl="file://$PROJECT_DIR$/Servicio/webservice.servicio.iml" filepath="$PROJECT_DIR$/Servicio/webservice.servicio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Actualizador/webservice.servicioactualizador.iml" filepath="$PROJECT_DIR$/Actualizador/webservice.servicioactualizador.iml" />
     </modules>
   </component>
 </project>
