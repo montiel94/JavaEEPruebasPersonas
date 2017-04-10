@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://implementacion.servicioactualizador.webservice.vtrack.vanesoft.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="WSActualizadorService" targetNamespace="http://implementacion.servicioactualizador.webservice.vtrack.vanesoft.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://implementacion.servicioactualizador.webservice.vtrack.vanesoft.com/" elementFormDefault="unqualified" targetNamespace="http://implementacion.servicioactualizador.webservice.vtrack.vanesoft.com/" version="1.0">
+
+  <xs:element name="actualizarEstado" type="tns:actualizarEstado"/>
+
+  <xs:element name="actualizarEstadoResponse" type="tns:actualizarEstadoResponse"/>
+
+  <xs:element name="getAllPedidos" type="tns:getAllPedidos"/>
+
+  <xs:element name="getAllPedidosResponse" type="tns:getAllPedidosResponse"/>
+
+  <xs:complexType name="getAllPedidos">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getAllPedidosResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:pedido"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CABEZOTE" type="xs:string"/>
+      <xs:element minOccurs="0" name="CHOFER" type="xs:string"/>
+      <xs:element minOccurs="0" name="CLIENTE" type="xs:string"/>
+      <xs:element minOccurs="0" name="COLA" type="xs:string"/>
+      <xs:element minOccurs="0" name="ESTADO" type="xs:integer"/>
+      <xs:element minOccurs="0" name="FIN" type="xs:string"/>
+      <xs:element minOccurs="0" name="INICIO" type="xs:string"/>
+      <xs:element minOccurs="0" name="NUMERO" type="xs:string"/>
+      <xs:element minOccurs="0" name="SOLICITUD" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="actualizarEstado">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+      <xs:element name="arg1" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="actualizarEstadoResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:pedido"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="actualizarEstado">
+    <wsdl:part element="tns:actualizarEstado" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="actualizarEstadoResponse">
+    <wsdl:part element="tns:actualizarEstadoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllPedidos">
+    <wsdl:part element="tns:getAllPedidos" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllPedidosResponse">
+    <wsdl:part element="tns:getAllPedidosResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WSActualizador">
+    <wsdl:operation name="getAllPedidos">
+      <wsdl:input message="tns:getAllPedidos" name="getAllPedidos">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllPedidosResponse" name="getAllPedidosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarEstado">
+      <wsdl:input message="tns:actualizarEstado" name="actualizarEstado">
+    </wsdl:input>
+      <wsdl:output message="tns:actualizarEstadoResponse" name="actualizarEstadoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSActualizadorServiceSoapBinding" type="tns:WSActualizador">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllPedidos">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getAllPedidos">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllPedidosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="actualizarEstado">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="actualizarEstado">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="actualizarEstadoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSActualizadorService">
+    <wsdl:port binding="tns:WSActualizadorServiceSoapBinding" name="WSActualizadorPort">
+      <soap:address location="http://localhost:8080/webservice.servicioactualizador/WSActualizador"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

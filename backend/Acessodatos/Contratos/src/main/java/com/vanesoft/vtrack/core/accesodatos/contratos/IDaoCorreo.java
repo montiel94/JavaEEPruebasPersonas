@@ -1,5 +1,6 @@
 package com.vanesoft.vtrack.core.accesodatos.contratos;
 
+import com.vanesoft.vtrack.core.entidades.Pedido;
 import com.vanesoft.vtrack.core.entidades.usuario;
 
 /**
@@ -13,4 +14,5 @@ public interface IDaoCorreo {
 
     public Boolean envioCorreoUsuarioParametrizado (usuario usuarioEnviarCorreo,String tipoPlantillaa);
 
+    public boolean armarCorreoPedidoEstado(usuario usuarioEnviarCorreo, Pedido pedido, String estado);
 }

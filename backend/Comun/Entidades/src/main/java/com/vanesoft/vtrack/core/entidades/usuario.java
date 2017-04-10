@@ -15,6 +15,7 @@ public class usuario extends EntidadBase{
     public String estadoUsuario;
     public String nombreempresa;
 
+
     public String getUsername() {
         return username;
     }

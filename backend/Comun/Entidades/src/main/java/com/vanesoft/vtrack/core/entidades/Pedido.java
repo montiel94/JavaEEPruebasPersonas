@@ -35,7 +35,18 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int codigoPedido, int estado, String fechaCreacion, String cola, String cabezote, String chofer, String inicio, String fin,ArrayList<Evento> eventos) {
+    public Pedido(int codigoPedido, int estado, String fechaCreacion, String cola, String cabezote, String chofer, String inicio, String fin) {
+        this.codigoPedido = codigoPedido;
+        this.estado = estado;
+        this.fechaCreacion = fechaCreacion;
+        this.cola = cola;
+        this.cabezote = cabezote;
+        this.chofer = chofer;
+        this.inicio = inicio;
+        this.fin = fin;
+    }
+
+    public Pedido(int codigoPedido, int estado, String fechaCreacion, String cola, String cabezote, String chofer, String inicio, String fin, ArrayList<Evento> eventos) {
         this.codigoPedido = codigoPedido;
         this.estado = estado;
         this.fechaCreacion = fechaCreacion;

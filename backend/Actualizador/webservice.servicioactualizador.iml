@@ -25,8 +25,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.1" level="project" />
     <orderEntry type="module" module-name="webservice.logica.implementacion" />
     <orderEntry type="library" name="Maven: javax:javaee-api:7.0" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.5.0" level="project" />
-    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Maven: com.vanesoft.vtrack.webservice:webservice.logica.contratos:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="core.comun.entidades" />
     <orderEntry type="library" name="Maven: org.apache.oltu.oauth2:org.apache.oltu.oauth2.common:1.0.2" level="project" />
@@ -47,8 +45,11 @@
     <orderEntry type="module" module-name="core.accesodatos.contratos" />
     <orderEntry type="module" module-name="core.accesodatos.implementacion" />
     <orderEntry type="module" module-name="core.comun.utilidades" />
+    <orderEntry type="module" module-name="core.comun.excepciones" />
+    <orderEntry type="module" module-name="demonios.servicios.consultor" />
     <orderEntry type="library" name="Maven: com.microsoft.sqlserver:sqljdbc4:4.0" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:javax.mail-api:1.5.1" level="project" />
-    <orderEntry type="module" module-name="core.comun.excepciones" />
+    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.sun.mail:javax.mail:1.5.2" level="project" />
   </component>
 </module>

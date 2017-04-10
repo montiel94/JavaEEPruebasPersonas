@@ -1,18 +1,27 @@
 package com.vanesoft.vtrack.demonios.servicios.consultor;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+
+import com.vanesoft.vtrack.demonios.servicios.consultor.Comandos.ComandoConvertirListaVtas;
+import com.vanesoft.vtrack.demonios.servicios.consultor.Comandos.ComandoGetHoraActual;
+import com.vanesoft.vtrack.demonios.servicios.consultor.Comandos.ComandoSincronizar;
+import com.vanesoft.vtrack.demonios.servicios.consultor.Comandos.ComandoTratarListaVtrack;
+import com.vanesoft.vtrack.demonios.servicios.consultor.EntidadesDemonio.Pedido;
+import com.vanesoft.vtrack.demonios.servicios.consultor.Fabricas.FabricaComando;
+import com.vanesoft.vtrack.demonios.servicios.consultor.Fabricas.FabricaDAO;
+import com.vanesoft.vtrack.demonios.servicios.consultor.soapvtassimulacion.WSActualizador;
+import com.vanesoft.vtrack.demonios.servicios.consultor.soapvtassimulacion.WSActualizadorService;
+import com.vanesoft.vtrack.demonios.servicios.consultor.utilidades.PropiedadesDemonios;
+
+import java.util.List;
+
 
 /**
  * Created by Daniel jose on 03/04/2017.
  */
 public class ConsultorService {
 
-    public static String getHoraActual() {
-        Date ahora = new Date();
-        SimpleDateFormat formateador = new SimpleDateFormat("hh:mm:ss");
-        return formateador.format(ahora);
-    }
+
 
     private static boolean stop = false;
 
@@ -20,11 +29,56 @@ public class ConsultorService {
         System.out.println("start");
         while (!stop) {
             try {
-                Thread.sleep(1000);
+                System.out.println("Empezando hilo");
+                WSActualizadorService wsActualizadorService = new WSActualizadorService();
+                WSActualizador wsActualizador = wsActualizadorService.getWSActualizadorPort();
+                List<com.vanesoft.vtrack.demonios.servicios.consultor.soapvtassimulacion.Pedido>
+                        prueba = wsActualizador.actualizarEstado(1,1);
+                sincronizar();
+                System.out.println("Llame WS");
+                 ComandoConvertirListaVtas comandoConvertirListaPedidosVtas =
+                        FabricaComando.obtenerComandoConvertirListaVtas(prueba);
+                List<Pedido> listaPedidosVtrack = comandoConvertirListaPedidosVtas.ejecutar();
+                tratarLista(listaPedidosVtrack);
+                Thread.sleep(Integer.valueOf(PropiedadesDemonios.CONFIG_TIEMPO_LLAMADO_SOAP_VTAS));
+
             } catch (InterruptedException e) {
             }
-            System.out.println(getHoraActual() + " : llamando a VTAS");
+
+
         }
+    }
+
+    public static String sincronizar(){
+        String ultimaSincronizacion = "";
+        try
+        {
+            ComandoGetHoraActual comandoGetHoraActual
+                    = FabricaComando.obtenerComandoGetHoraActual();
+            ComandoSincronizar  comandoSincronizar =
+                    FabricaComando.obtenerComandoSincronizar(comandoGetHoraActual.ejecutar());
+            ultimaSincronizacion = comandoSincronizar.ejecutar();
+        }catch(Exception e)
+        {
+
+        }
+        return ultimaSincronizacion;
+    }
+
+    public static void tratarLista(List<Pedido> listaVtas){
+
+        System.out.println("Saliendo de el metodo tratarLista");
+        try
+        {
+
+            ComandoTratarListaVtrack comandoTratarListaVtrack =
+                    FabricaComando.obtenerComandoTratarListaVtrack(listaVtas);
+            comandoTratarListaVtrack.ejecutar();
+        }catch (Exception e )
+        {
+
+        }
+        System.out.println("saliendo de el metodo tratLista");
     }
 
     public static void stop(String[] args) {

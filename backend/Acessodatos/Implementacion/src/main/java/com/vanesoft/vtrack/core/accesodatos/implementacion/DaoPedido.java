@@ -4,6 +4,7 @@ import com.vanesoft.vtrack.core.accesodatos.contratos.IDaoPedido;
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
 import com.vanesoft.vtrack.core.entidades.Pedido;
 
+import javax.security.auth.login.LoginException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -47,9 +48,27 @@ public class DaoPedido extends Dao implements IDaoPedido{
         return pedidosArray;
     }
 
+    public boolean insertarPedidoXCorreoCliente(Pedido pedidoAInsertar,String correo){
+        Boolean exito= false;
+        try {
+            Connection connection = crearConexion();
+            Statement stmt = connection.createStatement();
+            String query = "INSERT INTO VTRACK_PEDIDO "+
+                           "VALUES ("+pedidoAInsertar.getCodigoPedido()+","+pedidoAInsertar.getEstado()+",'"+pedidoAInsertar.getFechaCreacion()+"','"+pedidoAInsertar.getCola()+"','"+pedidoAInsertar.getCabezote()+"','"+pedidoAInsertar.getChofer()+"','"+pedidoAInsertar.getInicio()+"','"+pedidoAInsertar.getFin()+"'," +
+                           "(select us.ID FROM VTRACK_USUARIO us where us.CORREO = '"+correo+"'))";
+            stmt.execute(query);
+            connection.close();
+
+        } catch (Exception e) {
+
+            return false;
+        }
+        return true;
+    }
+
     public Pedido consultarPedidosXCodigo(String codigoPedido)
     {
-        Pedido pedidoEnBd = new Pedido();
+        Pedido pedidoEnBd = null;
         try {
 
             Connection connection = crearConexion();

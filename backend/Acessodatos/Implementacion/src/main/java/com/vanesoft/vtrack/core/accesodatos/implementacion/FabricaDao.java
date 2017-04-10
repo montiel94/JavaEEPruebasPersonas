@@ -101,4 +101,15 @@ public final class FabricaDao {
      */
     public static IDaoEvento obtenerDaoEvento(){ return new DaoEvento();}
 
+    /**
+     * Nombre:                  obtenerDaoSincronizacion
+     * Descripcion:             genera el DAOSincronizacion
+     *
+     * @return el dao
+     * @version 1.0
+     * @author montda
+     * @since 21/03/17
+     */
+    public static IDaoSincronizacion obtenerDaoSincronizacion(){ return new DaoSincronizacion();}
+
 }

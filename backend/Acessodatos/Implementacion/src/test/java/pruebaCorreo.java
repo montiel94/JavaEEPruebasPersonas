@@ -67,7 +67,7 @@ public class pruebaCorreo extends TestCase{
 
     public void testConsultarPedidoXCodigo(){
         IDaoPedido daoPedido = FabricaDao.obtenerDaoPedido();
-        Pedido pedidoEnBd = daoPedido.consultarPedidosXCodigo("7");
+        Pedido pedidoEnBd = daoPedido.consultarPedidosXCodigo("1000");
         assertEquals("hola","chao");
     }
 
@@ -81,5 +81,19 @@ public class pruebaCorreo extends TestCase{
         IDaoUsuario daoUsuario = FabricaDao.obtenerDaoUsuario();
         usuario usuarioEnBd = daoUsuario.buscarUsuarioXCodigoPedido("1");
         assertEquals("hola","hola");
+    }
+
+    public void testInsertarPedido(){
+        IDaoPedido daoPedido = FabricaDao.obtenerDaoPedido();
+        Pedido pedidoInsertar = new Pedido(102,
+                1,
+                "17-03-2017",
+                "QWE-123",
+                "POI-098",
+                "Daniel Jose Montiel Scanniello",
+                "10:00:00 AM",
+                "4:00:00 PM");
+        daoPedido.insertarPedidoXCorreoCliente(pedidoInsertar,"dmscanniello@gmail.com");
+
     }
 }

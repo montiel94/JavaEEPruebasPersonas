@@ -23,6 +23,11 @@
             <artifactId>webservice.logica.implementacion</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.vanesoft.vtrack.demonios</groupId>
+            <artifactId>demonios.servicios.consultor</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>webservice.servicioactualizador</finalName>

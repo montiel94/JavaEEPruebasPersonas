@@ -17,4 +17,5 @@ public interface IDaoPedido {
 
     public Boolean modificarDateTimeFinPedidoXCodigo(String codigoPedido);
 
+    public boolean insertarPedidoXCorreoCliente(Pedido pedidoAInsertar,String correo);
 }

@@ -11,8 +11,6 @@
             <element id="module-output" name="webservice.logica.implementacion" />
           </element>
           <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />
-          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.0" />
-          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="archive" name="webservice.logica.contratos-1.0-SNAPSHOT.jar">
             <element id="module-output" name="webservice.logica.contratos" />
           </element>
@@ -43,11 +41,16 @@
           <element id="archive" name="core.comun.utilidades-1.0-SNAPSHOT.jar">
             <element id="module-output" name="core.comun.utilidades" />
           </element>
-          <element id="library" level="project" name="Maven: com.microsoft.sqlserver:sqljdbc4:4.0" />
-          <element id="library" level="project" name="Maven: javax.mail:javax.mail-api:1.5.1" />
           <element id="archive" name="core.comun.excepciones-1.0-SNAPSHOT.jar">
             <element id="module-output" name="core.comun.excepciones" />
           </element>
+          <element id="archive" name="demonios.servicios.consultor-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="demonios.servicios.consultor" />
+          </element>
+          <element id="library" level="project" name="Maven: com.microsoft.sqlserver:sqljdbc4:4.0" />
+          <element id="library" level="project" name="Maven: javax.mail:javax.mail-api:1.5.1" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

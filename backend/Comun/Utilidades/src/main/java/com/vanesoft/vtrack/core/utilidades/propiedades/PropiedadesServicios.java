@@ -38,6 +38,8 @@ public class PropiedadesServicios extends PropiedadesBase {
             =get("respuesta.errorusuarioposeetoken");
     public static final String CONFIG_ESTADO_ENVIOCORREO_FINALIZADO_PEDIDO
             = get("config.estadoenviocorreofinalizadopedido");
+    public static final String CONFIG_TIEMPO_LLAMADO_SOAP_VTAS
+            = get("config.tiempollamadosoapvtas");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

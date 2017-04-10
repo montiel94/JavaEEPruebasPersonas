@@ -1,6 +1,10 @@
 package com.vanesoft.vtrack.webservice.servicioactualizador.contratos;
 
+
+import com.vanesoft.vtrack.demonios.servicios.consultor.EntidadesDemonio.Pedido;
+
 import javax.jws.WebMethod;
+import java.util.List;
 
 
 /**
@@ -19,6 +23,6 @@ public interface IWSActualizaor {
      * @version 1.0
      */
     @WebMethod
-    public void actualizarEstado(int codigoPedido, int codigoEstado);
+    public List<Pedido> actualizarEstado(int codigoPedido, int codigoEstado);
 
 }

@@ -1,6 +1,7 @@
 package com.vanesoft.vtrack.webservice.logica.implementacion;
 
 import com.vanesoft.vtrack.core.entidades.CodigoToken;
+import com.vanesoft.vtrack.core.entidades.Pedido;
 import com.vanesoft.vtrack.core.entidades.usuario;
 import com.vanesoft.vtrack.webservice.logica.implementacion.correo.ComandoEnviarCorreo;
 import com.vanesoft.vtrack.webservice.logica.implementacion.evento.ComandoConsultarEventosXPedido;
@@ -8,6 +9,8 @@ import com.vanesoft.vtrack.webservice.logica.implementacion.pedido.*;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoEliminarToken;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarCodigoAutorizacion;
 import com.vanesoft.vtrack.webservice.logica.implementacion.seguridad.ComandoGenerarToken;
+import com.vanesoft.vtrack.webservice.logica.implementacion.sincronizacion.ComandoConsultarSincronizacion;
+import com.vanesoft.vtrack.webservice.logica.implementacion.sincronizacion.ComandoModificarSincronizacion;
 import com.vanesoft.vtrack.webservice.logica.implementacion.usuario.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -267,6 +270,45 @@ public final class FabricaComando {
         return new ComandoBuscarUsuarioXcodigoPedido(codigoPedido);
     }
 
+
+    /**
+     * Nombre:                  obtenerComandoInsertarPedidoXCorreoCliente
+     * Descripcion:             genera el comando ComandoInsertarPedidoXCorreoCliente
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 02/04/17
+     */
+    public static ComandoInsertarPedidoXCorreoCliente obtenerComandoInsertarPedidoXCorreoCliente(Pedido pedido,String correoCliente){
+        return new ComandoInsertarPedidoXCorreoCliente(pedido,correoCliente);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoModificarSincronizacion
+     * Descripcion:             genera el comando ComandoModificarSincronizacion
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 02/04/17
+     */
+    public static ComandoModificarSincronizacion obtenerComandoModificarSincronizacion(String tiempo){
+        return new ComandoModificarSincronizacion(tiempo);
+    }
+
+    /**
+     * Nombre:                  obtenerComandoConsultarSincronizacion
+     * Descripcion:             genera el comando ComandoConsultarSincronizacion
+     *
+     * @return el comando
+     * @version 1.0
+     * @author montda
+     * @since 02/04/17
+     */
+    public static ComandoConsultarSincronizacion obtenerComandoConsultarSincronizacion (){
+        return new ComandoConsultarSincronizacion();
+    }
 
 
 
