@@ -49,6 +49,13 @@ public class DaoCodigoToken extends Dao implements IDaoCodigoToken {
         return true;
     }
 
+    /**
+     * Descripcion: metodo que modificar el valor de un token
+     * @params usuario : usuario a enviar correo
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     public boolean modificarValorToken(String nuevoValor, CodigoToken token) {
         try {
             Connection connection = crearConexion();

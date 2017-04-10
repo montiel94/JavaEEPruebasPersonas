@@ -8,7 +8,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Created by Daniel jose on 09/02/2017.
+ * Sistema:             Vtrack
+ * Nombre:              DaoParametro
+ * Descripcion:         dao dedicado a los parametros de un correo
+ *
+ * @author montda
+ * @version 1.0
+ * @since 04/02/2017
  */
 public class DaoParametro extends Dao implements IDaoParametro{
 

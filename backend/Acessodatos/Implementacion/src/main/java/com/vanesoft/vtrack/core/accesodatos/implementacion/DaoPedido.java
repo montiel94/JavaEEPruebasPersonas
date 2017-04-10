@@ -11,10 +11,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Created by Daniel jose on 13/03/2017.
+ * Sistema:             Vtrack
+ * Nombre:              IDaoPedido
+ * Descripcion:         Contrato del dao dedicado a las operaciones con pedidos
+ *
+ * @author montda
+ * @version 1.0
+ * @since 04/02/2017
  */
 public class DaoPedido extends Dao implements IDaoPedido{
 
+    /**
+     * Descripcion: metodo que consulta los pedidos de una empresa
+     * @param nombreEmpresa nombre de la empresa a consultar los pedidos
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     public ArrayList<Pedido> consultarPedidosXEmpresa(String nombreEmpresa)
     {
         ArrayList<Pedido> pedidosArray = new ArrayList<Pedido>();
@@ -47,7 +60,14 @@ public class DaoPedido extends Dao implements IDaoPedido{
 
         return pedidosArray;
     }
-
+    /**
+     * Descripcion: metodo que inserta un pedido dado el correo de un cliente
+     * @param correo correo del cliente dueno del pedido
+     * @param pedidoAInsertar  pedido a insertar en la base de datos
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     public boolean insertarPedidoXCorreoCliente(Pedido pedidoAInsertar,String correo){
         Boolean exito= false;
         try {
@@ -65,7 +85,13 @@ public class DaoPedido extends Dao implements IDaoPedido{
         }
         return true;
     }
-
+    /**
+     * Descripcion: metodo que consulta un pedido dado su codigo
+     * @param codigoPedido codigo del pedido a consultar
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     public Pedido consultarPedidosXCodigo(String codigoPedido)
     {
         Pedido pedidoEnBd = null;

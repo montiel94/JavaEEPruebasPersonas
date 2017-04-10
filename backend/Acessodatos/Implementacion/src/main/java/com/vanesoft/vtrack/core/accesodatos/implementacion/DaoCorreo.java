@@ -17,9 +17,23 @@ import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Random;
 /**
- * Created by Daniel jose on 08/02/2017.
+ * Sistema:             Vtrack
+ * Nombre:              IDaoCorreo
+ * Descripcion:         Contrato del dao dedicado a las operaciones con correos de notifiacion
+ *
+ * @author montda
+ * @version 1.0
+ * @since 04/02/2017
  */
 public class DaoCorreo implements IDaoCorreo{
+
+    /**
+     * Descripcion: metodo que envia correo finalmente
+     * @params usuario : usuario a enviar correo
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
 
     public void enviarCorreo(Correo correoEnviando)
     {
@@ -57,7 +71,14 @@ public class DaoCorreo implements IDaoCorreo{
             throw new RuntimeException(e);
         }
     }
-
+    /**
+     * Descripcion: metodo que generar password nueva
+     *
+     * @params usuario : usuario a enviar correo
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     public void envioCorreoUsuarioXIntentosLogin (usuario usuarioEnviarCorreo)
     {
         try {
@@ -84,7 +105,14 @@ public class DaoCorreo implements IDaoCorreo{
 
         }
     }
-
+    /**
+     * Descripcion: metodo que arma el correo cuando el usuario olvida su contrasena
+     *
+     * @params usuario : usuario a enviar correo
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     private boolean armarCorreoUsuarioOlvidoContrasena(usuario usuarioEnviarCorreo)
     {
         boolean exito = false;
@@ -108,7 +136,14 @@ public class DaoCorreo implements IDaoCorreo{
         exito = true;
         return exito;
     }
-
+    /**
+     * Descripcion: metodo que arma el correo cuando el pedido cambia de estado
+     *
+     * @params usuario : usuario a enviar correo, pedido pedido a detallar, estado : estado del pedido
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     public boolean armarCorreoPedidoEstado( usuario usuarioEnviarCorreo, Pedido pedido, String estado)
     {
         boolean exito = false;
@@ -134,7 +169,13 @@ public class DaoCorreo implements IDaoCorreo{
         exito = true;
         return exito;
     }
-
+    /**
+     * Descripcion: metodo que envia correo parametrizadamente
+     * @params usuario : usuario a enviar correo
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     public Boolean envioCorreoUsuarioParametrizado (usuario usuarioEnviarCorreo,String tipoPlantillaa)
     {
         Boolean exito = false;
@@ -151,6 +192,15 @@ public class DaoCorreo implements IDaoCorreo{
         }
         return exito;
     }
+
+    /**
+     * Descripcion: metodo que generar password nueva
+     *
+     * @params usuario : usuario a enviar correo
+     * @version 1.0
+     * @author montda
+     * @since 04/02/2017
+     */
     public String generarContrasenaProvisional(int longitud)
     {
         String cadenaAleatoria = "";
