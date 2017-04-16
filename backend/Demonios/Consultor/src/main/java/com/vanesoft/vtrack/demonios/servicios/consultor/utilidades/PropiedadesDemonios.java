@@ -25,7 +25,8 @@ public class PropiedadesDemonios extends PropiedadesBase {
     public static final String CONFIG_MAILSMTPUSER = get("config.mailsmtpuser");
     public static final String CONFIG_SETCONTENT = get("config.setcontent");
     public static final String CONFIG_MAILGETTRANSPORTE = get("config.mailgettransporte");
-
+    public static final String CONFIG_URL_SERVER_PUSH = get("config.urlserverpush");
+    public static final String CONFIG_KEY_FCM = get("config.keyfcm");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

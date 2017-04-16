@@ -318,6 +318,8 @@ public class UsuarioController extends BaseController {
             usuarioEnBd = comandoConsultarUsuario.ejecutar();
             if (!usuarioEnBd.getEstadoUsuario().equals(EstadoUsuario.nuevo))
                 throw new LogicaException(PropiedadesLogica.ERROR_USUARIO_NO_ES_NUEVO);
+            if (!user.getPassword().equals(CifrarDescifrar.descifrar(usuarioEnBd.getPassword())))
+                throw new LogicaException(PropiedadesLogica.ERROR_USUARIO_NUEVO_ERROR_CLAVE);
             exito = true;
         }
         catch (LogicaException e)
@@ -377,6 +379,11 @@ public class UsuarioController extends BaseController {
                 PropiedadesLogica.ERROR_USUARIO_NO_ES_NUEVO.length() - 3)))
         {
             getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_USUARIO_NO_POSEE_ESTADO_NUEVO);
+        }
+        if (e.getMessage().contains(PropiedadesLogica.ERROR_USUARIO_NUEVO_ERROR_CLAVE.substring(0,
+                PropiedadesLogica.ERROR_USUARIO_NUEVO_ERROR_CLAVE.length() - 3)))
+        {
+            getRespuesta().setMensaje(PropiedadesServicios.RESPUESTA_ERROR_USUARIO_NUEVO_CLAVE_ERRADA);
         }
 
         return super.obtenerMensajeDeError(e);

@@ -2,6 +2,7 @@ package com.vanesoft.vtrack.demonios.servicios.consultor.Comandos;
 
 import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Contratos.IDAOCorreo;
 import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Contratos.IDAOPedido;
+import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Contratos.IDAOPush;
 import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Contratos.IDAOUsuario;
 import com.vanesoft.vtrack.demonios.servicios.consultor.EntidadesDemonio.EstadoNotificacion;
 import com.vanesoft.vtrack.demonios.servicios.consultor.EntidadesDemonio.EstadoPedido;
@@ -43,13 +44,14 @@ public class ComandoTratarListaVtrack extends ComandoBase<Boolean>{
                 System.out.println("Pedido no existe en Bd");
                 tratarPedidoNoExistenteEnVtrack(pedidoEnlista);
                 enviarCorreoInicioLlenado(pedidoEnlista);
+                enviarPushInicioLlenado(pedidoEnlista);
             }else
             {
                 System.out.println("pedido existe en bd");
                 actualizarPedido(pedidoEnlista);
                 if (pedidoEnlista.getESTADO().intValue() == 7)
                 {
-                    verificarEnvioCorreoPedidoTerminado(pedidoEnlista);
+                    verificarEnvioNotificacionPedidoTerminado(pedidoEnlista);
                 }
 
             }
@@ -59,7 +61,7 @@ public class ComandoTratarListaVtrack extends ComandoBase<Boolean>{
 
     }
 
-    public void verificarEnvioCorreoPedidoTerminado(Pedido pedido)
+    public void verificarEnvioNotificacionPedidoTerminado(Pedido pedido)
     {
         System.out.println("Entrando al metodo verificarEnvioCorreoPedidoTerminado(");
         try {
@@ -70,11 +72,30 @@ public class ComandoTratarListaVtrack extends ComandoBase<Boolean>{
                 System.out.println("Debo enviar correo");
                 enviarCorreoTerminoLlenado(pedido);
             }
+            if (estados.get(EstadoNotificacion.nombreNotificacionPush).equals(EstadoNotificacion.enviadoCorreoPedidoInicioLLenado)){
+                System.out.println("Debo enviar push");
+                enviarPushTerminoLlenado(pedido);
+            }
         }
         catch (Exception e){
 
         }
 
+    }
+
+    public void enviarPushTerminoLlenado(Pedido pedidoEnlista){
+        try {
+            IDAOUsuario idaoUsuario = FabricaDAO.obtenerDAOUsuario();
+            IDAOPush idaoPush = FabricaDAO.obtenerDAOPush();
+            usuario usuarioDuenoPedido =
+                    idaoUsuario.buscarUsuarioXCorreoElectronico(pedidoEnlista.getCLIENTE());
+            idaoPush.EnviarPushEstado(usuarioDuenoPedido,pedidoEnlista,EstadoPedido.llenado);
+            idaoPush.confirmarEnvioPush(pedidoEnlista.getNUMERO(),EstadoNotificacion.enviadoCorreoPedidoTerminoLLenado);
+
+        }catch (Exception e)
+        {
+
+        }
     }
 
     public void actualizarPedido(Pedido pedidoEnlista){
@@ -116,6 +137,20 @@ public class ComandoTratarListaVtrack extends ComandoBase<Boolean>{
         }
     }
 
+    public void enviarPushInicioLlenado(Pedido pedidonuevo){
+        try {
+            IDAOUsuario idaoUsuario = FabricaDAO.obtenerDAOUsuario();
+            IDAOPush idaoPush = FabricaDAO.obtenerDAOPush();
+            usuario usuarioDuenoPedido =
+                    idaoUsuario.buscarUsuarioXCorreoElectronico(pedidonuevo.getCLIENTE());
+            idaoPush.EnviarPushEstado(usuarioDuenoPedido,pedidonuevo,EstadoPedido.enCola);
+            idaoPush.confirmarEnvioPush(pedidonuevo.getNUMERO(),EstadoNotificacion.enviadoCorreoPedidoInicioLLenado);
+
+        }catch (Exception e)
+        {
+
+        }
+    }
     public void enviarCorreoInicioLlenado(Pedido pedidonuevo){
         try {
             IDAOUsuario idaoUsuario = FabricaDAO.obtenerDAOUsuario();

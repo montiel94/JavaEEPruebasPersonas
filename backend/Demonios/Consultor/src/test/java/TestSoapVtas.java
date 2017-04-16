@@ -2,26 +2,31 @@
  * Created by Daniel jose on 04/04/2017.
  */
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vanesoft.vtrack.demonios.servicios.consultor.Comandos.ComandoTratarListaVtrack;
-import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Contratos.IDAOCorreo;
-import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Contratos.IDAOPedido;
-import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Contratos.IDAOUsuario;
+import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Contratos.*;
 import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Implementacion.DAOCorreo;
 import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Implementacion.DAOPedido;
 import com.vanesoft.vtrack.demonios.servicios.consultor.DAO.Implementacion.DAOUsuario;
-import com.vanesoft.vtrack.demonios.servicios.consultor.EntidadesDemonio.EstadoPedido;
-import com.vanesoft.vtrack.demonios.servicios.consultor.EntidadesDemonio.Pedido;
-import com.vanesoft.vtrack.demonios.servicios.consultor.EntidadesDemonio.usuario;
+import com.vanesoft.vtrack.demonios.servicios.consultor.EntidadesDemonio.*;
 import com.vanesoft.vtrack.demonios.servicios.consultor.Fabricas.FabricaDAO;
+import com.vanesoft.vtrack.demonios.servicios.consultor.utilidades.PropiedadesDemonios;
 import junit.framework.TestCase;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
 import javax.xml.ws.BindingProvider;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class TestSoapVtas extends TestCase{
 
@@ -116,7 +121,7 @@ public class TestSoapVtas extends TestCase{
         comandoInsertarPedidoXCorreoCliente.ejecutar();
     }
 
-    */public void testEnviarCorreoInicioLlenado()
+    public void testEnviarCorreoInicioLlenado()
     {
         try
         {
@@ -129,7 +134,7 @@ public class TestSoapVtas extends TestCase{
         }catch (Exception e){
 
         }
-    }/*
+    }*/ /*
 
     public void actualizarSincronizacion(String tiempo)
     {
@@ -174,13 +179,13 @@ public class TestSoapVtas extends TestCase{
         assertEquals("hola","hola");
     }
 
-    */public void testconfirmarEnvioCorreoInicioLlenado()
+    public void testconfirmarEnvioCorreoInicioLlenado()
     {
 
         DAOPedido daoPedido = new DAOPedido();
         //daoPedido.confirmarEnvioCorreoInicioLlenado("1");
         assertEquals("hola","hola");
-    }/*
+    }*/ /*
 
     public String getHoraActual() {
         Date ahora = new Date();
@@ -191,7 +196,7 @@ public class TestSoapVtas extends TestCase{
 
     public void testGetHoraActual(){
         assertEquals(getHoraActual(),"Hola");
-    }*/
+    }
     public void testUpdateEstado(){
         IDAOPedido idaoPedido = FabricaDAO.obtenerDAOPedido();
         idaoPedido.updateEstadoPedido("2",118);
@@ -202,5 +207,97 @@ public class TestSoapVtas extends TestCase{
         IDAOPedido idaoPedido = FabricaDAO.obtenerDAOPedido();
         idaoPedido.consultarEstadoNotificacionesPedidos("118");
         assertEquals("hola","hola");
+    }
+
+    public void testEnviarPushEstado(usuario usuarioEnviarPush,Pedido pedido,String estado){
+        String url = PropiedadesDemonios.CONFIG_URL_SERVER_PUSH;
+        CloseableHttpClient client = HttpClients.createDefault();
+        IDAOPlantilla idaoPlantilla = FabricaDAO.obtenerDAOPlantilla();
+        IDAOParametro daoParametro = FabricaDAO.obtenerDAOParametro();
+
+        try {
+            Plantilla plantillaEnBd = idaoPlantilla.consultarPlantilla(TipoPlantilla.pedidoestadopush);
+            ArrayList parametrosPlantillaEnBd = daoParametro.consultarParametrosXPlantilla(TipoPlantilla.pedidoestadopush);
+            Hashtable<String, String> valores = new Hashtable<String, String>();
+            valores.put(ParametroMensaje.nombreParametroNombreUsuario, usuarioEnviarPush.getNombreempresa());
+            valores.put(ParametroMensaje.nombreParametroCodigoPedido, String.valueOf(pedido.getNUMERO()));
+            valores.put(ParametroMensaje.nombreEstadoPedido,estado);
+            String MensajeFinal = Armador.armarMensaje(plantillaEnBd.getTexto(), parametrosPlantillaEnBd, valores);
+            HttpPost httpPost = new HttpPost(url);
+            notification notificationContenido =
+                    new notification(plantillaEnBd.getTitulo(), MensajeFinal);
+            push push = new push("/topics/"+usuarioEnviarPush.username.replace("@","~"), notificationContenido);
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(push);
+            StringEntity entity = new StringEntity(json);
+            httpPost.setEntity(entity);
+            httpPost.setHeader("Content-type", "application/json");
+            httpPost.setHeader("Authorization", PropiedadesDemonios.CONFIG_KEY_FCM);
+            CloseableHttpResponse response = client.execute(httpPost);
+            client.close();
+        }
+        catch (UnsupportedEncodingException e)
+        {
+
+        }
+        catch (JsonProcessingException e)
+        {
+
+        }
+        catch (IOException e)
+        {
+
+        }
+
+
+
+    }
+
+    public void testPush()
+    {
+        IDAOPedido idaoPedido = FabricaDAO.obtenerDAOPedido();
+        IDAOUsuario idaoUsuario = FabricaDAO.obtenerDAOUsuario();
+        Pedido pedido = idaoPedido.consultarPedidosXCodigo("118");
+        usuario usuario = idaoUsuario.buscarUsuarioXCorreoElectronico("dmscanniello@gmail.com");
+        testEnviarPushEstado(usuario,pedido,"iniciado");
+    }
+
+    public void testEnviarPush(){
+        String url = "https://fcm.googleapis.com/fcm/send";
+
+        CloseableHttpClient client = HttpClients.createDefault();
+        try {
+            HttpPost httpPost = new HttpPost(url);
+            notification notificationContenido =
+                    new notification("prueba en java", "prueba en java");
+            push push = new push("/topics/montiel94", notificationContenido);
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(push);
+            StringEntity entity = new StringEntity(json);
+            httpPost.setEntity(entity);
+            httpPost.setHeader("Content-type", "application/json");
+            httpPost.setHeader("Authorization", "key=AIzaSyAAjMPhNWNu_ZtUNc4pQwKAKRU_459AH80");
+            CloseableHttpResponse response = client.execute(httpPost);
+            client.close();
+        }
+        catch (UnsupportedEncodingException e)
+        {
+
+        }
+        catch (JsonProcessingException e)
+        {
+
+        }
+        catch (IOException e)
+        {
+
+        }
+
+
+
+    }*/
+
+    public void testAjuro(){
+        assertEquals("prueba","prueba");
     }
 }

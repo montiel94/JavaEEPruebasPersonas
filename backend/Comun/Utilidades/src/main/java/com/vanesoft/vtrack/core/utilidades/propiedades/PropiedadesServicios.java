@@ -40,6 +40,8 @@ public class PropiedadesServicios extends PropiedadesBase {
             = get("config.estadoenviocorreofinalizadopedido");
     public static final String CONFIG_TIEMPO_LLAMADO_SOAP_VTAS
             = get("config.tiempollamadosoapvtas");
+    public static final String RESPUESTA_ERROR_USUARIO_NUEVO_CLAVE_ERRADA =
+            get("respuesta.errorusuarionuevoclaverrada");
     /**
      * Nombre:                  get
      * Descripcion:             Metodo que obtiene el valor de una propiedad

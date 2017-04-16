@@ -208,7 +208,21 @@ angular.module('webAppVtrackApp')
     function  accionBtnAutoRegistro()
     {
         console.log('entrando al metodo accionBtnAutoRegistro');
-        showModalAutoregistro();
+        //showModalAutoregistro();
+        if (validaCampos())
+        {
+            ServicioLogin.validarUsuarioNuevo(view.user,view.password)
+                .then(function(data){
+                    console.log('se realizo consulta  exitosamente');
+                    console.log('bajar modal');
+                    ServicioLogin.setusuarioAutoRegistro(view.user)
+                    showModalAutoregistro();
+                })
+                .catch(function (error) {
+                    console.log('se produjo un error en el login');
+                    mostrarError(error);
+                });
+        }
         console.log('entrando al metodo accionBtnAutoRegistro');
     }
     /*

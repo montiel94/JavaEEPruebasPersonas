@@ -6,12 +6,15 @@ com\vanesoft\vtrack\demonios\servicios\consultor\utilidades\PropiedadesDemonios.
 com\vanesoft\vtrack\demonios\servicios\consultor\DAO\Implementacion\DAO.class
 com\vanesoft\vtrack\demonios\servicios\consultor\Fabricas\FabricaComando.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtas\Eventos.class
+com\vanesoft\vtrack\demonios\servicios\consultor\DAO\Contratos\IDAOPush.class
 com\vanesoft\vtrack\demonios\servicios\consultor\Comandos\ComandoSincronizar.class
 com\vanesoft\vtrack\demonios\servicios\consultor\DAO\Implementacion\DAOCorreo.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtas\package-info.class
+com\vanesoft\vtrack\demonios\servicios\consultor\EntidadesDemonio\notification.class
 com\vanesoft\vtrack\demonios\servicios\consultor\DAO\Implementacion\DAOParametro.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtas\ParametrosEventos.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtassimulacion\ActualizarEstado.class
+com\vanesoft\vtrack\demonios\servicios\consultor\EntidadesDemonio\push.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtassimulacion\GetAllPedidos.class
 com\vanesoft\vtrack\demonios\servicios\consultor\EntidadesDemonio\usuario.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtassimulacion\WSActualizador.class
@@ -36,8 +39,8 @@ com\vanesoft\vtrack\demonios\servicios\consultor\DAO\Contratos\IDAOPedido.class
 com\vanesoft\vtrack\demonios\servicios\consultor\DAO\Contratos\IDAOUsuario.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtas\ParametrosPedidos.class
 com\vanesoft\vtrack\demonios\servicios\consultor\EntidadesDemonio\EstadoNotificacion.class
-com\vanesoft\vtrack\demonios\servicios\consultor\Comandos\ComandoConsultarEstadoNotificacionPedido.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtas\RespuestaPedidos.class
+com\vanesoft\vtrack\demonios\servicios\consultor\Comandos\ComandoConsultarEstadoNotificacionPedido.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtassimulacion\WSActualizadorService.class
 com\vanesoft\vtrack\demonios\servicios\consultor\Comandos\ComandoBuscarPedidoXCodigo.class
 com\vanesoft\vtrack\demonios\servicios\consultor\EntidadesDemonio\Plantilla.class
@@ -50,6 +53,7 @@ com\vanesoft\vtrack\demonios\servicios\consultor\Comandos\ComandoGetHoraActual.c
 com\vanesoft\vtrack\demonios\servicios\consultor\Comandos\ComandoModificarPedido.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtassimulacion\ObjectFactory.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtas\RespuestaEventos.class
+com\vanesoft\vtrack\demonios\servicios\consultor\DAO\Implementacion\DAOPush.class
 com\vanesoft\vtrack\demonios\servicios\consultor\EntidadesDemonio\Pedido.class
 com\vanesoft\vtrack\demonios\servicios\consultor\soapvtas\Pedidos.class
 com\vanesoft\vtrack\demonios\servicios\consultor\DAO\Contratos\IDAOCorreo.class

@@ -31,4 +31,8 @@ public final class FabricaDAO {
     public static IDAOSincronizacion obtenerDAOSincronizacion(){
         return new DAOSincronizacion();
     }
+
+    public static IDAOPush obtenerDAOPush(){
+        return new DAOPush();
+    }
 }

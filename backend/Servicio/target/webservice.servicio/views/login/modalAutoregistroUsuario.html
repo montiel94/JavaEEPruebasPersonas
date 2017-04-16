@@ -6,7 +6,7 @@
                 <h4 class="modal-title">{{title}}</h4>
             </div>
             <div class="modal-body" id = "modalbody">
-                <p>1 - Ingrese su correo electronico : </p>
+                <!--<p>1 - Ingrese su correo electronico : </p>
 
                             <form name="myForm" class="form-horizontal" role="form">
                                 <div class="form-group">
@@ -18,8 +18,8 @@
                                     <ng-message when="asincValidator" class="error" style="color:red">*Usuario no existe</ng-message>
                                 </ng-messages>
                                 <br/>
-                            </form>
-                <p>2 - Su nueva contraseña debe cumplir con los siguientes requisitos :</p>
+                            </form>-->
+                <p>Su nueva contraseña debe cumplir con los siguientes requisitos :</p>
                 <p> Debe contener aunque sea 1 letra</p>
                 <p> Debe contener aunque sea 1 número</p>
                 <p> Debe tener una longitud mayor de 6</p>
@@ -28,11 +28,11 @@
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="password" ng-disabled=myForm.correoEmpresa.$invalid  required placeholder="Introduzca su nueva contraseña" class="inputCambioPassword" id = "password" ng-model="password">
+                            <input type="password"  required placeholder="Introduzca su nueva contraseña" class="inputCambioPassword" id = "password" ng-model="password">
                             <br/>
                             <br/>
                             <br/>
-                            <input type="password" ng-disabled=myForm.correoEmpresa.$invalid required placeholder="Confirme su nueva contraseña" class="inputCambioPassword" id = "passwordConfirmacion" ng-model="passwordConfirmacion">
+                            <input type="password"  required placeholder="Confirme su nueva contraseña" class="inputCambioPassword" id = "passwordConfirmacion" ng-model="passwordConfirmacion">
                         </div>
                     </div>
                 </form>

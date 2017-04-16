@@ -34,6 +34,8 @@ public class ComandoModificarPedido extends ComandoBase<Boolean>{
 
             idaoPedido.updateInicioPedido(pedidoModificando.getINICIO(),
                     Integer.valueOf(pedidoModificando.getNUMERO()));
+
+
         }catch (Exception e)
         {
 

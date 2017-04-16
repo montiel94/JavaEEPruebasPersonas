@@ -19,6 +19,46 @@ function ServicioLogin($q,$rootScope,$http,BASE_URL,$scope)
     this.autoregistro = autoregistro;
     this.getToken = getToken;
     this.modificarContrasenaUsuarioPerfil = modificarContrasenaUsuarioPerfil;
+    this.validarUsuarioNuevo = validarUsuarioNuevo;
+    this.setusuarioAutoRegistro= setusuarioAutoRegistro;
+    this.getusuarioAutoRegistro = getusuarioAutoRegistro;
+    var usuarioAutoRegistro;
+
+    function setusuarioAutoRegistro(valor) {
+        usuarioAutoRegistro = valor;
+    }
+
+    function getusuarioAutoRegistro() {
+        return usuarioAutoRegistro;
+    }
+
+    function validarUsuarioNuevo(correo,claveprosivional) {
+        console.log('entrando a la funcion validarUsuarioNuevo');
+        var usuario = {"username": correo,"password": claveprosivional};
+        var defered = $q.defer();
+        var promise = defered.promise;
+        $http
+        ({
+            method: 'post',
+            url: BASE_URL + '/usuario/autoRegistro',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: JSON.stringify(usuario)
+        }).then(function success(response)
+        {
+            console.log(response);
+            defered.resolve();
+        },function error(response)
+        {
+            console.log('error: '+response);
+            var error = response.data;
+            defered.reject(error.mensaje);
+        });
+        return promise;
+        console.log('saliendo de la funcion validarUsuarioNuevo');
+    }
+
     /*
          metodo encargado de terminar el proceso de autoregistro
          parametros

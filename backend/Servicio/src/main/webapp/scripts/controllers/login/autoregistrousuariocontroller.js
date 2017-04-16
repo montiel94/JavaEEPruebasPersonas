@@ -58,7 +58,8 @@ function autoregistrousuariocontroller ($scope, $element, title, close,$timeout,
 
         if (validarContrasena())
         {
-            ServicioLogin.autoregistro(view.correoEmpresa,view.password)
+            var correoEmpresa = ServicioLogin.getusuarioAutoRegistro();
+            ServicioLogin.autoregistro(correoEmpresa,view.password)
                 .then(function(data){
                     console.log('se realizo login exitosamente');
                     var error = data;
